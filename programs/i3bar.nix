@@ -15,11 +15,6 @@
             format = "{running/total}";
           }
           {
-            block = "pomodoro";
-            length = 45;
-            break_length = 10;
-          }
-          {
             block = "disk_space";
             path = "/";
             alias = "/";
@@ -44,18 +39,25 @@
             format = "{barchart}";
           }
           {
-            block = "battery";
-            interval = 10;
-            format = "{percentage} {time}";
-          }
-          {
             block = "networkmanager";
             primary_only = true;
           }
           {
+            block = "battery";
+            interval = 10;
+            good = 60;
+            warning = 20;
+            critical = 10;
+            format = "{percentage}";
+          }
+
+          {
             block = "sound";
             driver = "pulseaudio";
-            format = "{output_description} {volume}";
+            format = "{volume}";
+          }
+          {
+            block = "backlight";
           }
           {
             block = "keyboard_layout";

@@ -2,12 +2,14 @@
 
 {
   home.packages = with pkgs; [
-    #i3bar
-    i3status-rust
-    iw
+    #i3
+    betterlockscreen
     font-awesome
-    pulseaudio
-    
+    i3status-rust #i3bar
+    iw # ?
+    pulseaudio # sound
+    # xorg.xbacklight # brigthness
+
     # terminal
     alacritty
 
@@ -18,11 +20,17 @@
 
     # emacs
     emacs
-    sqlite
+    sqlite # org-roam
 
     # user needs
-    imagemagick
+    acpilight
     docker
+    discord
+    imagemagick
+    flameshot # screenshot
+    lolcat
+    mu # mail
+    slack
   ];
 
   imports = [
