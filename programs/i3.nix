@@ -94,7 +94,8 @@ in {
 
       keybindings = lib.mkOptionDefault {
 	      "${mod}+Return" = "exec alacritty";
-	      "${mod}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
+	      "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
+        "${mod}+Tab" = "exec ${pkgs.rofi}/bin/rofi -show window";
 
 	      "${mod}+1" = "workspace number 1";
 	      "${mod}+2" = "workspace number 2";

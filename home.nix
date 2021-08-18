@@ -1,6 +1,8 @@
-{pkgs, ...}:
+{pkgs, config, environment, ...}:
 
 {
+  fonts.fontconfig.enable = true;
+  
   home.packages = with pkgs; [
     #i3
     betterlockscreen
@@ -9,7 +11,7 @@
     i3wsr # rename workspace
     iw # ?
     pulseaudio # sound
-    # xorg.xbacklight # brigthness
+    rofi
 
     # terminal
     alacritty
@@ -23,6 +25,14 @@
     emacs
     sqlite # org-roam
 
+    #java
+    gradle
+    jetbrains.idea-ultimate
+    maven
+
+    # fonts
+    meslo-lgs-nf
+    
     # user needs
     acpilight
     docker
@@ -42,4 +52,5 @@
 
   programs.home-manager.enable = true;
 
+  
 }
