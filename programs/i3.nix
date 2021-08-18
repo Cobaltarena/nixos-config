@@ -138,7 +138,7 @@ in {
 	      # "${mod}+Shift+e" = "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes I want to go' 'i3-msg exit'";
         "${mod}+Shift+e" = ''mode "${logoutMode}"'';
 	      "${mod}+Shift+r" = "restart";
-        "${mod}+Shift+t" = "exec i3lock -i /home/gawain/.config/background.png";
+        "${mod}+Shift+t" = "exec --no-startup-id betterlockscreen -l -u ~/.config/lockscreen.png --suspend --off 15, mode default";
 
         "XF86MonBrightnessUp" = "exec light -A 5";
         "XF86MonBrightnessDown" =  "exec light -U 5";
@@ -159,10 +159,10 @@ in {
         in
           lib.mkOptionDefault {
             "${logoutMode}" = makeModeBindings {
-              "Shift+l" = "exec --no-startup-id i3-msg exit, mode default";
-              "Shift+s" = "exec --no-startup-id betterlockscreen -l -u ~/.config/lockscreen.png -r 1920x1080 --suspend --off 15, mode default";
-              "Shift+p" = "exec --no-startup-id systemctl poweroff, mode default";
-              "Shift+r" = "exec --no-startup-id systemctl reboot, mode default";
+              "l" = "exec --no-startup-id i3-msg exit, mode default";
+              "s" = "exec --no-startup-id betterlockscreen -l -u ~/.config/lockscreen.png --suspend --off 15, mode default";
+              "p" = "exec --no-startup-id systemctl poweroff, mode default";
+              "r" = "exec --no-startup-id systemctl reboot, mode default";
             };
           };
     };
