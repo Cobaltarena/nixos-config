@@ -6,6 +6,7 @@
     betterlockscreen
     font-awesome
     i3status-rust #i3bar
+    i3wsr # rename workspace
     iw # ?
     pulseaudio # sound
     # xorg.xbacklight # brigthness
@@ -28,7 +29,9 @@
     discord
     imagemagick
     flameshot # screenshot
+    htop
     lolcat
+    neofetch
     mu # mail
     slack
   ];

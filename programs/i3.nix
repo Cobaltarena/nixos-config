@@ -18,6 +18,11 @@ in {
           always = true;
           notification = true;
         }
+        {
+          command = "${pkgs.i3wsr}/bin/i3wsr --remove-duplicates";
+          always = true;
+          notification = true;
+        }
       ];
 
       bars =
@@ -34,15 +39,59 @@ in {
                 size = 9.0;
               };
 
-              
               # disable mouse scroll wheel in bar
               extraConfig = ''
                 bindsym button4 nop
                 bindsym button5 nop
               '';
+              colors = {
+
+                background = "#000000";
+                statusline = "orange";
+                separator = "yellow";
+
+                focusedWorkspace = {
+                  border = "#2f343f";
+                  background = "#8f3445";
+                  text = "#d8dee8";
+                };
+                activeWorkspace = {
+                  border = "#2f343f";
+                  background = "#4ff4ff";
+                  text = "#d8dee8";
+                };
+                inactiveWorkspace = {
+                  border = "#2f343f";
+                  background = "#2f343f";
+                  text = "#d8dee8";
+                };
+                urgentWorkspace = {
+                  border = "#2f343f";
+                  background = "#ebcb8b";
+                  text = "#2f343f";
+                };
+              };
             }
           ];
-      
+
+      colors = {
+        focused = {
+          background = "#8f3445";
+          border = "#333333";
+          text = "#ffffff";
+          indicator = "#484e50";
+          childBorder = "#8f3445";
+        };
+
+        focusedInactive = {
+          background = "#6f1425";
+          border = "#333333";
+          text = "#ffffff";
+          indicator = "#484e50";
+          childBorder = "#6f1425";
+        };
+      };
+
       keybindings = lib.mkOptionDefault {
 	      "${mod}+Return" = "exec alacritty";
 	      "${mod}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
@@ -57,7 +106,7 @@ in {
 	      "${mod}+8" = "workspace number 8";
 
 
-	      "${mod}+Shift+1" = "move container to workspace number 1";
+ 	    "${mod}+Shift+1" = "move container to workspace number 1";
 	      "${mod}+Shift+2" = "move container to workspace number 2";
 	      "${mod}+Shift+3" = "move container to workspace number 3";
 	      "${mod}+Shift+4" = "move container to workspace number 4";
@@ -91,7 +140,7 @@ in {
           lib.mkOptionDefault {
             "${logoutMode}" = makeModeBindings {
               "Shift+l" = "exec --no-startup-id i3-msg exit, mode default";
-              "Shift+s" = "exec --no-startup-id betterlockscreen -l -u ~/.config/lockscreen.png -r 1920x1080 --suspend, mode default";
+              "Shift+s" = "exec --no-startup-id betterlockscreen -l -u ~/.config/lockscreen.png -r 1920x1080 --suspend --off 15, mode default";
               "Shift+p" = "exec --no-startup-id systemctl poweroff, mode default";
               "Shift+r" = "exec --no-startup-id systemctl reboot, mode default";
             };
