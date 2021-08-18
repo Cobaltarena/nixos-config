@@ -12,6 +12,15 @@ in {
     config = {
       modifier = mod;
 
+      assigns = {
+        "4" = [
+          { class = "discord"; }
+        ];
+        "5" = [
+          { class = "Slack"; }
+        ];
+      };
+
       startup = [
         {
           command = "${pkgs.feh}/bin/feh --no-startup-id --bg-scale ~/.config/background.png";
@@ -20,6 +29,16 @@ in {
         }
         {
           command = "${pkgs.i3wsr}/bin/i3wsr --remove-duplicates";
+          always = true;
+          notification = true;
+        }
+        {
+          command = "${pkgs.discord}/bin/Discord";
+          always = true;
+          notification = true;
+        }
+        {
+          command = "${pkgs.slack}/bin/slack";
           always = true;
           notification = true;
         }
