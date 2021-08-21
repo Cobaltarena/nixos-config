@@ -1,7 +1,7 @@
 { pkgs, ...}:
 
 {
-  
+
   home.packages = with pkgs; [
     alacritty # fast terminal
     betterlockscreen # i3lockscreen
@@ -18,6 +18,7 @@
     i3wsr # rename workspace
     imagemagick # image processing
     jetbrains.idea-ultimate
+    llvm
     lolcat
     maven # java build system
     meslo-lgs-nf # emacs font

@@ -5,6 +5,7 @@
     enable = true;
     enableAutosuggestions = true;
     shellAliases = {
+      "e" = "emacs";
       "wifi-connect" = "nmcli device wifi";
     };
   };
