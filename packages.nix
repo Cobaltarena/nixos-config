@@ -1,14 +1,17 @@
-{pkgs, ...}:
+{ pkgs, ...}:
 
 {
+  
   home.packages = with pkgs; [
     alacritty # fast terminal
     betterlockscreen # i3lockscreen
+    cmake
     discord
     docker
     emacs
     flameshot # screenshot
     font-awesome # font and icon toolkit
+    gcc
     gradle # java build system
     htop # better top command
     i3status-rust #i3bar
@@ -22,6 +25,7 @@
     neofetch
     oh-my-zsh
     pulseaudio # sound
+    redshift # night light
     rofi # dmenu replacement
     slack
     sqlite # org-roam
