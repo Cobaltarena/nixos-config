@@ -3,6 +3,7 @@
 {
   imports = [
     ./alacritty.nix
+    ./emacs.nix
     ./i3.nix
     ./i3bar.nix
     ./redshift.nix
