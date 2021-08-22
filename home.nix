@@ -1,4 +1,4 @@
-{pkgs, config, environment, ...}:
+{...}:
 
 {
   fonts.fontconfig.enable = true;
@@ -11,5 +11,7 @@
 
   programs.home-manager.enable = true;
 
-  
+  home.homeDirectory = "/home/gawain";
+  home.stateVersion = "21.05";
+  home.username = "gawain";
 }
