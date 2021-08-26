@@ -15,9 +15,10 @@ in {
       assigns = {
         "4" = [
           { class = "discord"; }
+          { class = "Slack"; }
         ];
         "5" = [
-          { class = "Slack"; }
+          { class = "thunderbird"; }
         ];
       };
 
@@ -33,12 +34,7 @@ in {
           notification = true;
         }
         {
-          command = "${pkgs.discord}/bin/Discord";
-          always = true;
-          notification = true;
-        }
-        {
-          command = "${pkgs.slack}/bin/slack";
+          command = "${pkgs.numlockx}/bin/numlockx --no-startup-id off";
           always = true;
           notification = true;
         }
@@ -142,7 +138,7 @@ in {
 
         "XF86MonBrightnessUp" = "exec light -A 5";
         "XF86MonBrightnessDown" =  "exec light -U 5";
-        
+
         "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%";
         "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
         "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";

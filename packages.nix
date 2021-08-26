@@ -5,6 +5,9 @@
   home.packages = with pkgs; [
     alacritty # fast terminal
     betterlockscreen # i3lockscreen
+    bibata-cursors # cursor
+    bpytop
+    capitaine-cursors
     cmake
     discord
     docker
@@ -29,6 +32,7 @@
     mu # mail
     ncurses # vterm build
     neofetch
+    numlockx
     oh-my-zsh
     pandoc
     pulseaudio # sound
@@ -37,6 +41,7 @@
     rofi # dmenu replacement
     slack
     sqlite # org-roam
+    thunderbird
     zsh
     zsh-autosuggestions
   ];
