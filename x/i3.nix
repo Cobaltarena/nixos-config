@@ -12,16 +12,6 @@ in {
     config = {
       modifier = mod;
 
-      assigns = {
-        "4" = [
-          { class = "discord"; }
-          { class = "Slack"; }
-        ];
-        "5" = [
-          { class = "thunderbird"; }
-        ];
-      };
-
       startup = [
         {
           command = "${pkgs.feh}/bin/feh --no-startup-id --bg-scale ~/.config/background.png";
@@ -34,7 +24,22 @@ in {
           notification = true;
         }
         {
-          command = "${pkgs.numlockx}/bin/numlockx --no-startup-id off";
+          command = "${pkgs.numlockx}/bin/numlockx on";
+          always = true;
+          notification = true;
+        }
+        {
+          command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ~/.config/lockscreen.png";
+          always = true;
+          notification = true;
+        }
+        {
+          command = "${pkgs.i3}/bin/i3 workspace number 1";
+          always = true;
+          notification = true;
+        }
+        {
+          command = "${pkgs.xidlehook}/bin/xidlehook --not-when-fullscreen --not-when-audio --timer 240 'betterlockscreen -l' ''";
           always = true;
           notification = true;
         }
@@ -111,6 +116,8 @@ in {
 	      "${mod}+Return" = "exec alacritty";
 	      "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
         "${mod}+Tab" = "exec ${pkgs.rofi}/bin/rofi -show window";
+        "${mod}+f" = "exec firefox";
+        "${mod}+x" = "exec emacs";
 
 	      "${mod}+1" = "workspace number 1";
 	      "${mod}+2" = "workspace number 2";
@@ -131,10 +138,14 @@ in {
 	      "${mod}+Shift+7" = "move container to workspace number 7";
 	      "${mod}+Shift+8" = "move container to workspace number 8";
 
-	      # "${mod}+Shift+e" = "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes I want to go' 'i3-msg exit'";
         "${mod}+Shift+e" = ''mode "${logoutMode}"'';
 	      "${mod}+Shift+r" = "restart";
-        "${mod}+Shift+t" = "exec --no-startup-id betterlockscreen -l -u ~/.config/lockscreen.png --suspend --off 15, mode default";
+        "${mod}+Shift+t" = "exec --no-startup-id betterlockscreen -l, mode default";
+
+        "${mod}+Ctrl+Shift+Left" = "resize shrink width 5 px or 5 ppt";
+        "${mod}+Ctrl+Shift+Down" = "resize grow height 5 px or 5 ppt";
+        "${mod}+Ctrl+Shift+Up" = "resize shrink height 5 px or 5 ppt";
+        "${mod}+Ctrl+Shift+Right" =  "resize grow width 5 px or 5 ppt";
 
         "XF86MonBrightnessUp" = "exec light -A 5";
         "XF86MonBrightnessDown" =  "exec light -U 5";
@@ -142,9 +153,7 @@ in {
         "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%";
         "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
         "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
-
       };
-
 
       modes =
         let
@@ -156,7 +165,7 @@ in {
           lib.mkOptionDefault {
             "${logoutMode}" = makeModeBindings {
               "l" = "exec --no-startup-id i3-msg exit, mode default";
-              "s" = "exec --no-startup-id betterlockscreen -l -u ~/.config/lockscreen.png --suspend --off 15, mode default";
+              "s" = "exec --no-startup-id betterlockscreen -l, mode default";
               "p" = "exec --no-startup-id systemctl poweroff, mode default";
               "r" = "exec --no-startup-id systemctl reboot, mode default";
             };

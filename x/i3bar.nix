@@ -3,23 +3,17 @@
 {
   programs.i3status-rust = {
     enable = true;
-
     bars = {
       top = {
         icons = "awesome5";
-
+    	theme = "solarized-dark";
         blocks = [
-          {
-            block = "docker";
-            interval = 2;
-            format = "{running/total}";
-          }
           {
             block = "disk_space";
             path = "/";
-            alias = "/";
             info_type = "available";
-            unit = "GB";
+            format = "{icon} {used}/{total} | {available}";
+	    unit = "GB";
             interval = 60;
             warning = 20.0;
             alert = 10.0;
