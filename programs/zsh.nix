@@ -34,10 +34,10 @@ let
           "ga"="git add";
           "gl"="git log";
           "gp"="git pull";
+          "nix-regenv"=''echo "use nix" > .envrc; direnv allow'';
         };
 
         sessionVariables = {
-          "JAVA_HOME"="/home/gawain/.jdks/corretto-11.0.12";
           "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE"="fg=10";
           "EDITOR"="vim";
         };
@@ -54,6 +54,10 @@ let
             };
           }
         ];
+
+        initExtra = ''
+        eval "$(direnv hook zsh)"
+          '';
       };
 
       programs.zsh.oh-my-zsh = {
