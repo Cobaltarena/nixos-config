@@ -7,5 +7,4 @@
       epkgs.vterm
     ];
   };
-
 }

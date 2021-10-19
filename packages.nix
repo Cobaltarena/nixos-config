@@ -8,7 +8,7 @@
     bear
     betterlockscreen # i3lockscreen
     bibata-cursors # cursor
-    bpytop
+    binutils
     capitaine-cursors
     clang
     cmake
@@ -55,6 +55,7 @@
     sqlite # org-roam
     thunderbird
     xautolock
+    xclip
     xidlehook
     xsel
     xss-lock

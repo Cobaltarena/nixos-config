@@ -1,8 +1,5 @@
 { pkgs, callPackage, ... }: {
 
-  # config.location.provider = "geoclue2";
-       
-  # All values except 'enable' are optional.
   services.redshift = {
     enable = true;
     settings = {

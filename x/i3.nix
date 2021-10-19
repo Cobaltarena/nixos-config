@@ -3,7 +3,6 @@
 let
   mod = "Mod4";
   logoutMode = "[L]ogout, [S]uspend, [P]oweroff, [R]eboot";
-
 in {
   xsession.scriptPath = ".hm-xsession";
 
@@ -34,11 +33,6 @@ in {
           notification = true;
         }
         {
-          command = "${pkgs.i3}/bin/i3 workspace number 1";
-          always = true;
-          notification = true;
-        }
-        {
           command = "${pkgs.xidlehook}/bin/xidlehook --not-when-fullscreen --not-when-audio --timer 240 'betterlockscreen -l' ''";
           always = true;
           notification = true;
@@ -52,6 +46,7 @@ in {
         in
           [
             {
+              workspaceNumbers = false;
               statusCommand = "i3status-rs ${barConfigPath}";
               position = "top";
               fonts = {
@@ -119,28 +114,28 @@ in {
         "${mod}+f" = "exec firefox";
         "${mod}+x" = "exec emacs";
 
-	      "${mod}+1" = "workspace number 1";
-	      "${mod}+2" = "workspace number 2";
-	      "${mod}+3" = "workspace number 3";
-	      "${mod}+4" = "workspace number 4";
-	      "${mod}+5" = "workspace number 5";
-	      "${mod}+6" = "workspace number 6";
-	      "${mod}+7" = "workspace number 7";
-	      "${mod}+8" = "workspace number 8";
+	      "${mod}+1" = "workspace number 1:(1)";
+	      "${mod}+2" = "workspace number 2:(2)";
+	      "${mod}+3" = "workspace number 3:(3)";
+        "${mod}+4" = "workspace number 4:(4)";
+	      "${mod}+Ctrl+1" = "workspace number 5:(C1)";
+	      "${mod}+Ctrl+2" = "workspace number 6:(C2)";
+	      "${mod}+Ctrl+3" = "workspace number 7:(C3)";
+	      "${mod}+Ctrl+4" = "workspace number 8:(C4)";
 
 
- 	    "${mod}+Shift+1" = "move container to workspace number 1";
-	      "${mod}+Shift+2" = "move container to workspace number 2";
-	      "${mod}+Shift+3" = "move container to workspace number 3";
-	      "${mod}+Shift+4" = "move container to workspace number 4";
-	      "${mod}+Shift+5" = "move container to workspace number 5";
-	      "${mod}+Shift+6" = "move container to workspace number 6";
-	      "${mod}+Shift+7" = "move container to workspace number 7";
-	      "${mod}+Shift+8" = "move container to workspace number 8";
+
+ 	    "${mod}+Shift+1" = "move container to workspace number 1:(1)";
+	      "${mod}+Shift+2" = "move container to workspace number 2:(2)";
+	      "${mod}+Shift+3" = "move container to workspace number 3:(3)";
+	      "${mod}+Shift+4" = "move container to workspace number 4:(4)";
+	      "${mod}+Ctrl+Shift+1" = "move container to workspace number 5:(C1)";
+	      "${mod}+Ctrl+Shift+2" = "move container to workspace number 6:(C2)";
+	      "${mod}+Ctrl+Shift+3" = "move container to workspace number 7:(C3)";
+	      "${mod}+Ctrl+Shift+4" = "move container to workspace number 8:(C4)";
 
         "${mod}+Shift+e" = ''mode "${logoutMode}"'';
 	      "${mod}+Shift+r" = "restart";
-        "${mod}+Shift+t" = "exec --no-startup-id betterlockscreen -l, mode default";
 
         "${mod}+Ctrl+Shift+Left" = "resize shrink width 5 px or 5 ppt";
         "${mod}+Ctrl+Shift+Down" = "resize grow height 5 px or 5 ppt";
