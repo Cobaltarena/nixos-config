@@ -15,6 +15,7 @@
     criterion
     croc
     discord
+    direnv
     docker
     docker-compose
     libclang.lib
@@ -42,6 +43,8 @@
     meslo-lgs-nf # emacs font
     mu # mail
     ncurses # vterm build
+    nix-prefetch-git
+    nix-prefetch-github
     nixpkgs-fmt
     neofetch
     numlockx
