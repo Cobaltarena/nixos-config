@@ -19,6 +19,7 @@
     docker-compose
     libclang.lib
     libtool
+    feh
     firefox
     flameshot # screenshot
     font-awesome # font and icon toolkit
