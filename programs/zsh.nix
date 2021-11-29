@@ -52,22 +52,24 @@ in
     ];
 
     sessionVariables = {
-      "ZSH_DISABLE_COMPFIX"="true";
-      "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE"="fg=10";
-      "ALTERNATE_EDITOR"="";
-      "VISUAL"="emacsclient -c -a 'emacs'";
-      "EDITOR"="emacsclient -c -a 'emacs'";
+      "ZSH_DISABLE_COMPFIX" = "true";
+      "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=10";
+      "ALTERNATE_EDITOR" = "";
+      "VISUAL" = "emacsclient -c -a 'emacs'";
+      "EDITOR" = "emacsclient -c -a 'emacs'";
     };
 
     shellAliases = {
+      "diff" = "diff -y --suppress-common-lines --color=always --width=105 -r -a";
       "emacs" = "emacsclient -c -a 'emacs'";
       "wifi-connect" = "nmcli device wifi";
-      "gst"="git status";
-      "ga"="git add";
-      "gl"="git pull";
-      "gp"="git push";
-      "nix-regenv"=''echo "use nix" > .envrc; direnv allow'';
-      "cat"=''bat --paging=never -f'';
+      "gst" = "git status";
+      "ga" = "git add";
+      "gl" = "git pull";
+      "gp" = "git push";
+      "glog" = "git log --oneline --decorate --graph";
+      "nix-regenv" =''echo "use nix" > .envrc; direnv allow'';
+      "cat" = ''bat --paging=never -f'';
     };
 
     initExtra = ''
