@@ -37,6 +37,11 @@ in {
           always = true;
           notification = true;
         }
+        {
+          command = "${pkgs.emacs}/bin/emacs --daemon &";
+          always = true;
+          notification = true;
+        }
       ];
 
       bars =
@@ -61,10 +66,10 @@ in {
               '';
               colors = {
 
-                background = "#000000";
+                # background = "#6a6a6a";
+
                 statusline = "orange";
                 separator = "yellow";
-
                 focusedWorkspace = {
                   border = "#2f343f";
                   background = "#8f3445";
@@ -76,9 +81,9 @@ in {
                   text = "#d8dee8";
                 };
                 inactiveWorkspace = {
-                  border = "#2f343f";
-                  background = "#2f343f";
-                  text = "#d8dee8";
+                 border = "#6a6a6a";
+                 background = "#6a6a6a";
+                 text = "#d8dee8";
                 };
                 urgentWorkspace = {
                   border = "#2f343f";
@@ -112,7 +117,7 @@ in {
 	      "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
         "${mod}+Tab" = "exec ${pkgs.rofi}/bin/rofi -show window";
         "${mod}+f" = "exec firefox";
-        "${mod}+x" = "exec emacs";
+        "${mod}+x" = "exec emacsclient -c -a 'emacs'";
 
 	      "${mod}+1" = "workspace number 1:(1)";
 	      "${mod}+2" = "workspace number 2:(2)";
@@ -142,12 +147,13 @@ in {
         "${mod}+Ctrl+Shift+Up" = "resize shrink height 5 px or 5 ppt";
         "${mod}+Ctrl+Shift+Right" =  "resize grow width 5 px or 5 ppt";
 
-        "XF86MonBrightnessUp" = "exec light -A 5";
-        "XF86MonBrightnessDown" =  "exec light -U 5";
+        "${mod}+F1" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
+        "${mod}+F2" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
+        "${mod}+F3" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%";
 
-        "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%";
-        "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
-        "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
+        "${mod}+F5" =  "exec light -U 5";
+        "${mod}+F6" = "exec light -A 5";
+
       };
 
       modes =

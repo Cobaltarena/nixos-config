@@ -41,18 +41,22 @@ in
     ];
 
     sessionVariables = {
+      "ZSH_DISABLE_COMPFIX"="true";
       "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE"="fg=10";
-      "EDITOR"="vim";
+      "ALTERNATE_EDITOR"="";
+      "VISUAL"="emacsclient -c -a 'emacs'";
+      "EDITOR"="emacsclient -c -a 'emacs'";
     };
 
     shellAliases = {
-      "e" = "emacs";
+      "emacs" = "emacsclient -c -a 'emacs'";
       "wifi-connect" = "nmcli device wifi";
       "gst"="git status";
       "ga"="git add";
       "gl"="git pull";
       "gp"="git push";
       "nix-regenv"=''echo "use nix" > .envrc; direnv allow'';
+      "cat"=''bat --paging=never -f'';
     };
 
     initExtra = ''
@@ -64,8 +68,10 @@ in
     enable = true;
     custom = "${customDir}";
     plugins = [
+      "colored-man-pages"
       "git"
       "sudo"
+      "history-substring-search"
     ];
     theme = "gnzsh-nix";
   };

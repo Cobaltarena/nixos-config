@@ -6,7 +6,11 @@
     bars = {
       top = {
         icons = "awesome5";
-    	theme = "solarized-dark";
+        settings = {
+    	    theme = "solarized-dark";
+            overrides = {
+            };
+        };
         blocks = [
           {
             block = "disk_space";
@@ -33,6 +37,12 @@
             format = "{barchart}";
           }
           {
+            block = "bluetooth";
+            mac = "58:A6:39:04:17:2B";
+            hide_disconnected = true;
+            format = "{label} Buds2";
+          }
+          {
             block = "networkmanager";
             primary_only = true;
           }
@@ -49,14 +59,6 @@
             block = "sound";
             driver = "pulseaudio";
             format = "{volume}";
-          }
-          {
-            block = "backlight";
-          }
-          {
-            block = "keyboard_layout";
-            driver = "setxkbmap";
-            interval = 15;
           }
           {
             block = "time";
