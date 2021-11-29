@@ -20,6 +20,16 @@ let
     '';
   };
 
+  nix-zsh-completions = {
+    name = "nix-zsh-completions";
+    src = pkgs.fetchFromGitHub {
+      owner = "spwhitt";
+      repo = "nix-zsh-completions";
+      rev = "468d8cf752a62b877eba1a196fbbebb4ce4ebb6f";
+      sha256 = "TWgo56l+FBXssOYWlAfJ5j4pOHNmontOEolcGdihIJs=";
+    };
+  };
+
   zsh-nix-shell = {
     name = "zsh-nix-shell";
     file = "nix-shell.plugin.zsh";
@@ -38,6 +48,7 @@ in
 
     plugins = [
       zsh-nix-shell
+      nix-zsh-completions
     ];
 
     sessionVariables = {
@@ -70,8 +81,6 @@ in
     plugins = [
       "colored-man-pages"
       "git"
-      "sudo"
-      "history-substring-search"
     ];
     theme = "gnzsh-nix";
   };
