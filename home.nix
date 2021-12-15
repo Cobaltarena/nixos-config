@@ -15,5 +15,4 @@
   home.homeDirectory = "/home/gawain";
   home.stateVersion = "21.05";
   home.username = "gawain";
-
 }

@@ -4,6 +4,7 @@
   programs.rofi = {
     enable = true;
     terminal = "${pkgs.alacritty}/bin/alacritty";
-    theme = "purple";
+    # deprecated, must wait for a fix
+    # theme = "purple"
   };
 }

@@ -45,6 +45,7 @@ in
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
+    enableCompletion = true;
 
     plugins = [
       zsh-nix-shell
@@ -70,6 +71,10 @@ in
       "glog" = "git log --oneline --decorate --graph";
       "nix-regenv" =''echo "use nix" > .envrc; direnv allow'';
       "cat" = ''bat --paging=never -f'';
+      "nixu" = "nix flake update";
+      "nixc" = "nix flake check";
+      "nixf" = "nix flake show";
+      "nixd" = "nix flake develop";
     };
 
     initExtra = ''

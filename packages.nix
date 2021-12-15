@@ -4,14 +4,14 @@
 
   home.packages = with pkgs; [
     alacritty # fast terminal
+    arandr
     bat # prettier cat
-    bear
+    bear # cdb
     betterlockscreen # i3lockscreen
-    bibata-cursors # cursor
+    # bibata-cursors # cursor
     binutils
     blueman
-    bluez
-    capitaine-cursors
+    bluez # bluetooth
     # clang
     cmake
     cppcheck
@@ -80,10 +80,11 @@
     xidlehook
     xsel
     xss-lock
-    yamllint
+    yamllint # yaml backend
     yq # prettier yaml
     zip
     zsh
     zsh-autosuggestions
+    nix-zsh-completions
   ];
 }
