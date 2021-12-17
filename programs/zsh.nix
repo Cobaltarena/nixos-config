@@ -70,7 +70,7 @@ in
       "gp" = "git push";
       "glog" = "git log --oneline --decorate --graph";
       "nix-regenv" =''echo "use nix" > .envrc; direnv allow'';
-      "cat" = ''bat --paging=never -f'';
+      "bat" = ''bat --paging=never -f'';
       "nixu" = "nix flake update";
       "nixc" = "nix flake check";
       "nixf" = "nix flake show";

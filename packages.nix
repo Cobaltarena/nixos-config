@@ -25,10 +25,12 @@
     libclang.lib
     libtool
     feh
+    file
     firefox
     flameshot # screenshot
     font-awesome # font and icon toolkit
     gcc
+    git-lfs
     gimp
     glib.dev # vterm build
     glib.out # vterm build

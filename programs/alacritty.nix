@@ -7,6 +7,7 @@
       font.size = 12;
       background_opacity = 0.5;
       mouse.hide = true;
+      window.dynamic_title = true;
       key_bindings = [
         {
           key = "C";
