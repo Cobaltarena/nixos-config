@@ -42,6 +42,11 @@ in {
           always = true;
           notification = true;
         }
+        {
+          command = "${pkgs.flameshot}/bin/flameshot";
+          always = true;
+          notification = true;
+        }
       ];
 
       bars =
@@ -153,6 +158,8 @@ in {
 
         "${mod}+F5" =  "exec light -U 5";
         "${mod}+F6" = "exec light -A 5";
+
+        "${mod}+Shift+P" = "exec flameshot gui";
 
       };
 

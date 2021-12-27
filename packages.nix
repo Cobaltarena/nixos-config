@@ -22,8 +22,11 @@
     docker
     docker-compose
     evince
+    exa # ls replacement ?
+    leiningen
     libclang.lib
     libtool
+    fd
     feh
     file
     firefox
@@ -85,6 +88,7 @@
     yamllint # yaml backend
     yq # prettier yaml
     zip
+    zoxide
     zsh
     zsh-autosuggestions
     nix-zsh-completions

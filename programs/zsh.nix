@@ -58,19 +58,25 @@ in
       "ALTERNATE_EDITOR" = "";
       "VISUAL" = "emacsclient -c -a 'emacs'";
       "EDITOR" = "emacsclient -c -a 'emacs'";
+      "_ZO_ECHO" = "1"; # 'When set to 1, z will print the matched directory before navigating to it.
+      "_ZO_RESOLVE_SYMLINKS" = "1"; # When set to 1, z will resolve symlinks before adding directories to the database.
     };
 
     shellAliases = {
       "diff" = "diff -y --suppress-common-lines --color=always --width=105 -r -a";
       "emacs" = "emacsclient -c -a 'emacs'";
       "wifi-connect" = "nmcli device wifi";
+
       "gst" = "git status";
       "ga" = "git add";
       "gl" = "git pull";
       "gp" = "git push";
       "glog" = "git log --oneline --decorate --graph";
+
       "nix-regenv" =''echo "use nix" > .envrc; direnv allow'';
+
       "bat" = ''bat --paging=never -f'';
+
       "nixu" = "nix flake update";
       "nixc" = "nix flake check";
       "nixf" = "nix flake show";
@@ -79,6 +85,7 @@ in
 
     initExtra = ''
       eval "$(direnv hook zsh)"
+      eval "$(zoxide init --hook pwd zsh)"
     '';
   };
 
