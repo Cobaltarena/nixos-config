@@ -55,8 +55,8 @@ in
     sessionVariables = {
       "ZSH_DISABLE_COMPFIX" = "true";
       "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=10";
-      "VISUAL" = "$(which emacsclient) -c -a=";
-      "EDITOR" =  "$(which emacsclient) -c -a=";
+      "VISUAL" = "vim";
+      "EDITOR" =  "vim";
       "_ZO_ECHO" = "1"; # 'When set to 1, z will print the matched directory before navigating to it.
       "_ZO_RESOLVE_SYMLINKS" = "1"; # When set to 1, z will resolve symlinks before adding directories to the database.
     };

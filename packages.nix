@@ -12,7 +12,10 @@
     binutils
     blueman
     bluez # bluetooth
-    # clang
+    # llvmPackages_13.clang
+    ccls
+    chromium
+    clang-tools
     cmake
     cppcheck
     criterion
@@ -23,12 +26,12 @@
     docker-compose
     evince
     exa # ls replacement ?
-    leiningen
-    libclang.lib
-    libtool
     fd
     feh
     file
+    fira
+    fira-mono
+    fira-code
     firefox
     flameshot # screenshot
     font-awesome # font and icon toolkit
@@ -39,6 +42,7 @@
     glib.dev # vterm build
     glib.out # vterm build
     gnumake
+    graphviz
     htop # better top command
     i3status-rust #i3bar
     i3wsr # rename workspace
@@ -48,11 +52,9 @@
     jetbrains.idea-ultimate
     jq # prettier json
     killall
-    libclang
+    leiningen
     libvterm-neovim
     llvm
-    llvmPackages.libclang
-    lolcat
     man-db
     man-pages
     maven
@@ -70,10 +72,14 @@
     pandoc
     postgresql
     postman
+    pre-commit
     pulseaudio # sound
     python3
+    python39Packages.pip
+    qemu
     redshift # night light
     rofi # dmenu replacement
+    roboto-mono
     slack
     spotify
     sqlite # org-roam
@@ -84,6 +90,7 @@
     tree
     unifdef
     unzip
+    vscode
     xautolock
     xclip
     xidlehook
