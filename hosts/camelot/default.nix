@@ -10,15 +10,16 @@
       ./hardware-configuration.nix
       ./x/i3.nix
       ./x/sddm.nix
+      ./home.nix
     ];
 
-  boot.loader.grub = {
-      enable = true;
-      version = 2;
-      device = "nodev";
-      efiSupport = true;
-      enableCryptodisk = true;
-  };
+  # boot.loader.grub = {
+  #     enable = true;
+  #     version = 2;
+  #     device = "nodev";
+  #     efiSupport = true;
+  #     enableCryptodisk = true;
+  # };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -107,8 +108,8 @@
   virtualisation.docker.enable = true;
   # virtualisation.docker.enableOnBoot = true;
   virtualisation.docker.liveRestore = false;
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+  #virtualisation.virtualbox.host.enable = true;
+  #virtualisation.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "gawain" ];
 
   # Enable the OpenSSH daemon.

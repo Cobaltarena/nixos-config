@@ -3,16 +3,16 @@
 with lib;
 
 let
-  customCfg = config.packages.nix;
+  customCfg = config.my.packages.nix;
 in {
-  options.config.packages.nix = (mkEnableOption "User Nix related packages") // { default = false; };
+  options.my.packages.nix.enable = (mkEnableOption "User Nix related packages") // { default = true; };
 
   config= mkIf customCfg.enable {
-    programs = {
-      nix-linter.enable = true;
-      nix-prefetch-git.enable = true;
-      nix-prefetch-github.enable = true;
-      nixpkgs-fmt.enable = true;
-    };
+    home.packages = with pkgs; [
+      nix-linter
+      nix-prefetch-git
+      nix-prefetch-github
+      nixpkgs-fmt
+    ];
   };
 }

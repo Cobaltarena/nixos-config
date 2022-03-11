@@ -5,7 +5,7 @@ with lib;
 let
   customCfg = config.my.packages.fonts;
 in {
-  options.my.packages.fonts.enable = (mkEnableOption "User font packages") // { default = false; };
+  options.my.packages.fonts.enable = (mkEnableOption "User font packages") // { default = true; };
 
   config = mkIf customCfg.enable {
     home.packages = with pkgs; [

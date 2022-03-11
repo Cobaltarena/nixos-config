@@ -93,9 +93,8 @@
             camelot = nixpkgs.lib.nixosSystem rec {
               inherit system;
               modules = [
-                ./camelot.nix # TODO
-                (home-manager.nixosModules.home-manager)
-              ] ++ (nixpkgs.lib.attrValues self.nixosModules);
+                ./camelot.nix
+              ] ++ sharedModules;
             };
           };
       };

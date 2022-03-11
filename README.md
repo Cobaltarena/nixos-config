@@ -4,7 +4,7 @@
 
 # Switching home config
 
-```nix build .#homeManagerConfigurations.adam@Isolde.activationPackage && ./result/activate```
+```nix build .#homeManagerConfigurations.gawain@Camelot.activationPackage && ./result/activate```
 
 or
 

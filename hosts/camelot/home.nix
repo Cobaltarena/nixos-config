@@ -8,8 +8,9 @@
       fonts.enable = true;
       misc.enable = true;
       nix.enable = true;
-      python.enable = true;
+      # python.enable = true;
       terminal.enable = true;
       x.enable = true;
-    }
+    };
+  };
 }
