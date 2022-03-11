@@ -19,7 +19,7 @@
     cmake
     cppcheck
     criterion
-    croc
+    croc # ??? apparently its used to send files via CLI
     discord
     direnv
     docker
@@ -70,12 +70,18 @@
     numlockx
     oh-my-zsh
     pandoc
+
+    python310Packages.python-lsp-server
+
+    python310Packages.black
+    python310Packages.flake8
+    python310Packages.isort
+ 
     postgresql
-    postman
     pre-commit
     pulseaudio # sound
     python3
-    python39Packages.pip
+    python310Packages.pip
     qemu
     redshift # night light
     rofi # dmenu replacement
@@ -88,7 +94,6 @@
     texlive.combined.scheme-full
     thunderbird
     tree
-    unifdef
     unzip
     vscode
     xautolock
