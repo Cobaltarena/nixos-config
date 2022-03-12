@@ -13,6 +13,7 @@ in {
       nix-prefetch-git
       nix-prefetch-github
       nixpkgs-fmt
+      rnix-lsp
     ];
   };
 }

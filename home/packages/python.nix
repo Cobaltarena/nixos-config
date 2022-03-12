@@ -15,6 +15,7 @@ in {
       python310Packages.isort
       python310Packages.pip
       python310Packages.python-lsp-server
+      python310Packages.virtualenv
     ];
   };
 }
