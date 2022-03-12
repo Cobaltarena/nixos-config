@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.i3status-rust = {
+  programs.i3status-rust = lib.mkIf config.my.packages.x.enable {
     enable = true;
     bars = {
       top = {

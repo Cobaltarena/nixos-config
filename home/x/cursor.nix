@@ -1,9 +1,9 @@
-{pkgs, config, ...}:
+{ pkgs, lib, config, ...}:
 
 {
-  xsession.pointerCursor = {
+  xsession.pointerCursor = lib.mkIf config.my.packages.x.enable {
     package = pkgs.bibata-cursors;
-    name = "Bibata Classic";
+    name = "Bibata-Modern-Amber";
     size = 24;
   };
 }

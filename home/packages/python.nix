@@ -3,18 +3,18 @@
 with lib;
 
 let
-  customCfg = config.packages.python;
+  customCfg = config.my.packages.python;
 in {
-  options.config.packages.python = (mkEnableOption "User Python dev packages") // { default = false; };
+  options.my.packages.python.enable = (mkEnableOption "User Python dev packages") // { default = false; };
 
   config = mkIf customCfg.enable {
-    programs = {
-      python3.enable = true;
-      python310Packages.black.enable = true;
-      python310Packages.flake8.enable = true;
-      python310Packages.isort.enable = true;
-      python310Packages.pip.enable = true;
-      python310Packages.python-lsp-server.enable = true;
-    };
+    home.packages = with pkgs; [
+      python3
+      python310Packages.black
+      python310Packages.flake8
+      python310Packages.isort
+      python310Packages.pip
+      python310Packages.python-lsp-server
+    ];
   };
 }

@@ -11,7 +11,7 @@ in
     ./fonts.nix
     ./misc.nix
     ./nix.nix
-    # ./python.nix
+    ./python.nix
     ./terminal.nix
     ./x.nix
   ];

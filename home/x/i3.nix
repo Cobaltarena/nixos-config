@@ -6,7 +6,7 @@ let
 in {
   xsession.scriptPath = ".hm-xsession";
 
-  xsession.windowManager.i3 = {
+  xsession.windowManager.i3 = lib.mkIf config.my.packages.x.enable {
     enable = true;
     config = {
       modifier = mod;
@@ -39,11 +39,6 @@ in {
         }
         {
           command = "${pkgs.xidlehook}/bin/xidlehook --not-when-fullscreen --not-when-audio --timer 240 'betterlockscreen -l' ''";
-          always = true;
-          notification = true;
-        }
-        {
-          command = "${pkgs.emacs}/bin/emacs --daemon &";
           always = true;
           notification = true;
         }
@@ -127,7 +122,7 @@ in {
 	      "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
         "${mod}+Tab" = "exec ${pkgs.rofi}/bin/rofi -show window";
         "${mod}+f" = "exec firefox";
-        "${mod}+x" = "exec emacsclient -c -a 'emacs'";
+        "${mod}+x" = "exec emacs";
 
 	      "${mod}+1" = "workspace number 1:(1)";
 	      "${mod}+2" = "workspace number 2:(2)";

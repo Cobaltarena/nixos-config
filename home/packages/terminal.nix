@@ -8,31 +8,26 @@ in {
   options.my.packages.terminal.enable = (mkEnableOption "User terminal util packages") // { default = false; };
 
   config = mkIf customCfg.enable {
-    programs = {
-      alacritty.enable = true; # terminal
-      bat.enable = true; # prettier cat
-      direnv.enable = true;
-      exa.enable = true; # ls replacement ?
-
-      fzf.enable = true;
-      htop.enable = true;# better top command
-      jq.enable = true; # prettier json
-      pandoc.enable = true;
-      zsh.enable = true;
-    };
 
     home.packages = with pkgs; [
+      bat
       binutils
+      direnv
+      exa
       fd
       file
+      fzf
       git-lfs
       graphviz
+      htop
+      jq
       killall
       man-db
       man-pages
-      ncurses
       nix-zsh-completions
+      ncurses
       oh-my-zsh
+      pandoc
       pre-commit
       tree
       unzip
