@@ -11,23 +11,16 @@
       ./x/i3.nix
       ./x/sddm.nix
       ./home.nix
+      #./users # TODO: directory containing all users
     ];
-
-  # boot.loader.grub = {
-  #     enable = true;
-  #     version = 2;
-  #     device = "nodev";
-  #     efiSupport = true;
-  #     enableCryptodisk = true;
-  # };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices = {
        root = {
-	    device = "/dev/disk/by-uuid/c7cb0f50-758f-4c2a-98e9-09feb3e639a9";
-            preLVM = true;
+	       device = "/dev/disk/by-uuid/c7cb0f50-758f-4c2a-98e9-09feb3e639a9";
+         preLVM = true;
        };
   };
 
@@ -39,7 +32,6 @@
 
   networking.hostName = "camelot"; # Define your hostname.
 
-  # Set your time zone.
   time.timeZone = "Europe/Paris";
 
   networking.useDHCP = false;
@@ -47,24 +39,15 @@
   networking.interfaces.enp2s0.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   programs.dconf.enable = true;
   programs.light.enable = true;
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.bluetooth.enable = true;
 
   users.users.root.initialHashedPassword = "";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gawain = {
     isNormalUser = true;
     home = "/home/gawain";
@@ -76,13 +59,10 @@
     ];
   };
 
-  # Add some extra stuff for a given user
   users.extraUsers.gawain = {
     shell = pkgs.zsh;
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     cron
     git
@@ -108,8 +88,8 @@
   virtualisation.docker.enable = true;
   # virtualisation.docker.enableOnBoot = true;
   virtualisation.docker.liveRestore = false;
-  #virtualisation.virtualbox.host.enable = true;
-  #virtualisation.virtualbox.host.enableExtensionPack = true;
+  # virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "gawain" ];
 
   # Enable the OpenSSH daemon.
@@ -117,12 +97,6 @@
 
   # firmware update
   services.fwupd.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   system.stateVersion = "21.11";
   nix = {

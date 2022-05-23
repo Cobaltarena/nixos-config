@@ -6,6 +6,7 @@
       owner = "NixOS";
       repo = "nixpkgs";
       ref = "nixos-unstable";
+      # rev = "a7ecde854aee5c4c7cd6177f54a99d2c1ff28a31";
     };
 
     # nixpkgs-unstable-small = {
@@ -13,13 +14,6 @@
     #   owner = "NixOS";
     #   repo = "nixpkgs";
     #   ref = "nixos-unstable-small";
-    # };
-
-    # emacs-overlay = {
-    #   type = "github";
-    #   owner = "nix-community";
-    #   repo = "emacs-overlay";
-    #   ref = "master";
     # };
 
     home-manager = {
@@ -80,7 +74,7 @@
                 # packages accessible through pkgs.unstable.package
                 unstable = import inputs.nixpkgs-unstable-small {
                   inherit system;
-                  config.allowUnfree = true;
+                  nixpkgs.config.allowUnfree = true;
                 };
               })
 

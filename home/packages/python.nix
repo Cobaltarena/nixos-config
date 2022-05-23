@@ -10,12 +10,12 @@ in {
   config = mkIf customCfg.enable {
     home.packages = with pkgs; [
       python3
-      python310Packages.black
-      python310Packages.flake8
-      python310Packages.isort
-      python310Packages.pip
-      python310Packages.python-lsp-server
-      python310Packages.virtualenv
+      python39Packages.black
+      python39Packages.flake8
+      python39Packages.isort
+      python39Packages.pip
+      python39Packages.python-lsp-server
+      python39Packages.virtualenv
     ];
   };
 }

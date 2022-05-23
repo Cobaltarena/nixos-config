@@ -21,6 +21,7 @@ in {
       qemu
       stdenv.cc.cc.lib
       texlive.combined.scheme-full
+      # virtualbox
     ];
   };
 }

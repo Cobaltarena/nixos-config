@@ -8,7 +8,6 @@
     ./programs
     ./x
   ];
-
   home.homeDirectory = "/home/gawain";
   home.stateVersion = "21.11";
   home.username = "gawain";

@@ -16,6 +16,8 @@ in {
       font-awesome # font and icon toolkit
       meslo-lgs-nf # emacs font
       roboto-mono
+
+      hicolor-icon-theme # todo: move in theme.nix
     ];
   };
 }
