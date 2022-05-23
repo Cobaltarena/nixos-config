@@ -18,7 +18,7 @@ in {
           notification = true;
         }
         {
-          command = "${pkgs.feh}/bin/feh --no-startup-id --bg-scale ~/.config/background.png";
+          command = "${pkgs.feh}/bin/feh --no-startup-id --bg-scale ~/.config/nixpkgs/background.png";
           always = true;
           notification = true;
         }
@@ -33,7 +33,7 @@ in {
           notification = true;
         }
         {
-          command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ~/.config/lockscreen.png";
+          command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ~/.config/nixpkgs/lockscreen.png";
           always = true;
           notification = true;
         }
