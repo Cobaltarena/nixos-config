@@ -87,7 +87,7 @@
             camelot = nixpkgs.lib.nixosSystem rec {
               inherit system;
               modules = [
-                ./camelot.nix
+                ./Camelot.nix
               ] ++ sharedModules;
             };
           };
