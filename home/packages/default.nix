@@ -9,6 +9,7 @@ in
     ./buildSystems.nix
     ./c_cpp.nix
     ./fonts.nix
+    ./js.nix
     ./misc.nix
     ./nix.nix
     ./python.nix

@@ -9,13 +9,22 @@ in {
 
   config = mkIf customCfg.enable {
     home.packages = with pkgs; [
-      python3
-      python39Packages.black
-      python39Packages.flake8
-      python39Packages.isort
-      python39Packages.pip
-      python39Packages.python-lsp-server
-      python39Packages.virtualenv
+      poetry
+      python39
+      python3Packages.black
+      python3Packages.flake8
+      python3Packages.isort
+      python3Packages.mypy
+      python3Packages.pip
+      python3Packages.virtualenv
+
+      python3Packages.python-lsp-server
+      python3Packages.python-lsp-black
+      python3Packages.python-lsp-isort
+      # python3Packages.pyls-black
+      # python3Packages.pyls-flake8
+      # python3Packages.pyls-isort
+      # python3Packages.pyls-mypy
     ];
   };
 }

@@ -63,7 +63,7 @@
           };
         };
 
-        # overlays = import ./overlays;
+        overlays = import ./overlay;
         # TODO
         # System config
         nixosConfigurations =
@@ -78,13 +78,14 @@
                 };
               })
 
-            ]; # ++ builtins.attrValues self.overlays;
+            ] ++ builtins.attrValues self.overlays;
             sharedModules = [
               home-manager.nixosModule
               { nixpkgs.overlays = shared_overlays; }
             ] ++ (nixpkgs.lib.attrValues self.nixosModules);
           in {
             camelot = nixpkgs.lib.nixosSystem rec {
+              specialArgs = { inherit inputs; };
               inherit system;
               modules = [
                 ./Camelot.nix

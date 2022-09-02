@@ -14,14 +14,13 @@ in {
     home.packages = with pkgs; [
       docker
       docker-compose
-      libvterm-neovim
+      imagemagick
       numlockx
       postgresql
       pulseaudio
       qemu
       stdenv.cc.cc.lib
       texlive.combined.scheme-full
-      # virtualbox
     ];
   };
 }

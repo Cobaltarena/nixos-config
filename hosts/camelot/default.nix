@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
   imports =
@@ -88,8 +88,8 @@
   virtualisation.docker.enable = true;
   # virtualisation.docker.enableOnBoot = true;
   virtualisation.docker.liveRestore = false;
-  # virtualisation.virtualbox.host.enable = true;
-  # virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "gawain" ];
 
   # Enable the OpenSSH daemon.
@@ -104,6 +104,15 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    nixPath = [
+      "nixpkgs=/etc/nix/channels/nixpkgs"
+      "home-manager=/etc/nix/channels/home-manager"
+    ];
+  };
+  environment.etc = {
+    "nix/channels/nixpkgs".source = inputs.nixpkgs.outPath;
+    "nix/channels/home-manager".source = inputs.home-manager.outPath;
   };
   nixpkgs.config.allowUnfree = true;
 

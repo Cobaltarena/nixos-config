@@ -7,6 +7,7 @@
       buildSystems.enable = true;
       c_cpp.enable = true;
       fonts.enable = true;
+      js.enable = true;
       misc.enable = true;
       nix.enable = true;
       python.enable = true;
