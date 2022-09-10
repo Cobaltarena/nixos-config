@@ -14,9 +14,11 @@
       #./users # TODO: directory containing all users
     ];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 7;
+  };
   boot.loader.efi.canTouchEfiVariables = true;
-
   boot.initrd.luks.devices = {
        root = {
 	       device = "/dev/disk/by-uuid/c7cb0f50-758f-4c2a-98e9-09feb3e639a9";
@@ -29,15 +31,45 @@
     "button.lid_init_state=open"
   ];
 
-
-  networking.hostName = "camelot"; # Define your hostname.
+  nix = {
+    package = pkgs.nixUnstable;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+      dates = "monthly";
+    };
+    settings = {
+      experimental-features = "nix-command flakes";
+      auto-optimise-store = true;
+      warn-dirty = false;
+      substituters = [
+        "https://nix-community.cachix.org/"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    nixPath = [
+      "nixpkgs=/etc/nix/channels/nixpkgs"
+      "home-manager=/etc/nix/channels/home-manager"
+    ];
+  };
+  environment.etc = {
+    "nix/channels/nixpkgs".source = inputs.nixpkgs.outPath;
+    "nix/channels/home-manager".source = inputs.home-manager.outPath;
+  };
+  nixpkgs.config.allowUnfree = true;
 
   time.timeZone = "Europe/Paris";
 
-  networking.useDHCP = false;
-  networking.networkmanager.enable = true;
-  networking.interfaces.enp2s0.useDHCP = true;
-  networking.interfaces.wlp3s0.useDHCP = true;
+  networking = {
+    hostName = "camelot"; # Define your hostname.
+    useDHCP = false;
+    networkmanager.enable = true;
+    interfaces.enp2s0.useDHCP = true;
+    interfaces.wlp3s0.useDHCP = true;
+  };
 
   programs.dconf.enable = true;
   programs.light.enable = true;
@@ -57,10 +89,12 @@
       "video"
       "wheel"
     ];
+    shell = pkgs.zsh;
   };
 
-  users.extraUsers.gawain = {
-    shell = pkgs.zsh;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -88,33 +122,15 @@
   virtualisation.docker.enable = true;
   # virtualisation.docker.enableOnBoot = true;
   virtualisation.docker.liveRestore = false;
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  users.extraGroups.vboxusers.members = [ "gawain" ];
+  # virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
+  # users.extraGroups.vboxusers.members = [ "gawain" ];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
   # firmware update
   services.fwupd.enable = true;
-
-  system.stateVersion = "21.11";
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
-    nixPath = [
-      "nixpkgs=/etc/nix/channels/nixpkgs"
-      "home-manager=/etc/nix/channels/home-manager"
-    ];
-  };
-  environment.etc = {
-    "nix/channels/nixpkgs".source = inputs.nixpkgs.outPath;
-    "nix/channels/home-manager".source = inputs.home-manager.outPath;
-  };
-  nixpkgs.config.allowUnfree = true;
-
+  documentation.dev.enable = true;
 }
 
