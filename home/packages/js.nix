@@ -10,6 +10,7 @@ in {
   config = mkIf customCfg.enable {
     home.packages = with pkgs; [
       nodejs-16_x
+      nodePackages.pnpm
       nodePackages.typescript
       nodePackages.typescript-language-server
     ];

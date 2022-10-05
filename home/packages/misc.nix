@@ -14,6 +14,7 @@ in {
     home.packages = with pkgs; [
       docker
       docker-compose
+      gnupg
       imagemagick
       numlockx
       postgresql

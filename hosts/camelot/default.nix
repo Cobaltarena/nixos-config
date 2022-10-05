@@ -83,6 +83,7 @@
   users.users.gawain = {
     isNormalUser = true;
     home = "/home/gawain";
+    group = "gawain";
     extraGroups = [
       "docker"
       "networkmanager"
