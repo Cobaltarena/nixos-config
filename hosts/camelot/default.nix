@@ -26,6 +26,8 @@
        };
   };
 
+  boot.extraModulePackages = [ pkgs.bcc ];
+
   boot.kernelParams = [
     "acpi_backlight=vendor"
     "button.lid_init_state=open"
@@ -65,10 +67,10 @@
 
   networking = {
     hostName = "camelot"; # Define your hostname.
-    useDHCP = false;
     networkmanager.enable = true;
-    interfaces.enp2s0.useDHCP = true;
-    interfaces.wlp3s0.useDHCP = true;
+    extraHosts = ''
+       127.0.0.1 gitea droneci
+    '';
   };
 
   programs.dconf.enable = true;
@@ -99,6 +101,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    zlib
+    bcc
     cron
     git
     libsForQt515.qtgraphicaleffects

@@ -9,6 +9,7 @@ in {
 
   config = mkIf customCfg.enable {
     home.packages = with pkgs; [
+      bcc
       poetry
       python39
       python3Packages.black
@@ -21,10 +22,6 @@ in {
       python3Packages.python-lsp-server
       python3Packages.python-lsp-black
       python3Packages.python-lsp-isort
-      # python3Packages.pyls-black
-      # python3Packages.pyls-flake8
-      # python3Packages.pyls-isort
-      # python3Packages.pyls-mypy
     ];
   };
 }

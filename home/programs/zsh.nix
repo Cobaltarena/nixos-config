@@ -71,15 +71,8 @@ in
       "gp" = "git push";
       "glog" = "git log --oneline --decorate --graph";
 
-      "nix-regenv" =''echo "use nix" > .envrc; direnv allow'';
-
-      "bat" = ''bat --paging=never -f'';
-
-      "nixu" = "nix flake update";
-      "nixflu" = "nix flake lock --update input";
-      "nixc" = "nix flake check";
-      "nixf" = "nix flake show";
-      "nixd" = "nix flake develop";
+      "nixs-regenv" =''echo "use nix" >> .envrc; direnv allow'';
+      "nixf-regenv" =''echo "use flake" >> .envrc; direnv allow'';
     };
 
     initExtra = ''

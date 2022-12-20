@@ -27,7 +27,6 @@ in {
       spotify
       teams
       thunderbird
-      vscode
       xautolock
       xidlehook
       xsel

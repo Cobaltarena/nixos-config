@@ -2,7 +2,6 @@
 
 {
   fonts.fontconfig.enable = true;
-
   imports = [
     ./packages
     ./programs

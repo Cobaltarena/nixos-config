@@ -12,14 +12,17 @@ in {
     };
 
     home.packages = with pkgs; [
+      zlib
+
+      (aspellWithDicts (dicts: with dicts; [ en en-computers en-science fr ]))
       docker
       docker-compose
       gnupg
       imagemagick
+      morgen
       numlockx
-      postgresql
+      obsidian
       pulseaudio
-      qemu
       stdenv.cc.cc.lib
       texlive.combined.scheme-full
     ];
