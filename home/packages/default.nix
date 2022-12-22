@@ -15,5 +15,6 @@ in
     ./python.nix
     ./terminal.nix
     ./x.nix
+    ./yubikey.nix
   ];
 }

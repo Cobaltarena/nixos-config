@@ -18,6 +18,7 @@
       python.enable = true;
       terminal.enable = true;
       x.enable = true;
+      yubikey.enable = true;
     };
   };
 }
