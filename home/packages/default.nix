@@ -1,9 +1,5 @@
 { config, lib, ... }:
 
-with lib;
-let
-  cfg = config.services.packages;
-in
 {
   imports = [
     ./buildSystems.nix

@@ -3,11 +3,10 @@
 {
   imports = [
     ./alacritty.nix
-    ./bluetooth.nix
-    ./emacs.nix
+    ./bluetooth.nix # TODO FIX
+    ./emacs.nix # TODO FIX
     ./htop.nix
     ./firefox.nix
-    ./fzf.nix
     ./redshift.nix
     ./rofi.nix
     ./zsh.nix

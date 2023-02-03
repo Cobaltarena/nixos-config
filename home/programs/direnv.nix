@@ -1,8 +1,15 @@
+{ config, lib, pkgs, ... }:
 
+with lib;
 
-{
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
-  # optional for nix flakes support in home-manager 21.11, not required in home-manager unstable or 22.05
-  programs.direnv.nix-direnv.enableFlakes = true;
+let
+  customCfg = config.my.programs.direnv;
+in {
+  options.my.programs.direnv.enable = (mkEnableOption "Direnv config") // { default = true; };
+
+  config = mkIf customCfg.enable {
+    programs.direnv.enable = true;
+    programs.direnv.nix-direnv.enable = true;
+    programs.direnv.nix-direnv.enableFlakes = true;
+  };
 }

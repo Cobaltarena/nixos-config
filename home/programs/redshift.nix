@@ -1,8 +1,8 @@
-{ pkgs, callPackage, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   services.redshift = {
-    enable = true;
+    enable = ! pkgs.stdenv.hostPlatform.isDarwin;
     settings = {
       redshift = {
         brightness-day = "1";

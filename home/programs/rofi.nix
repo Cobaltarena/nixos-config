@@ -10,7 +10,7 @@ let
 in
 {
   programs.rofi = {
-    enable = true;
+    enable = ! pkgs.stdenv.hostPlatform.isDarwin;
     terminal = "${pkgs.alacritty}/bin/alacritty";
     theme = "${rofi-themes}/themes/squared-material-red.rasi";
     extraConfig = {

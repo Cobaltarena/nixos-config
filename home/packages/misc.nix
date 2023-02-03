@@ -7,9 +7,6 @@ let
 in {
     options.my.packages.misc.enable = (mkEnableOption "Misc packages") // { default = true; };
   config = mkIf customCfg.enable {
-    programs = {
-      mu.enable = true; # mail
-    };
 
     home.packages = with pkgs; [
       zlib
@@ -19,9 +16,8 @@ in {
       docker-compose
       gnupg
       imagemagick
-      morgen
       numlockx
-      obsidian
+      podman
       pulseaudio
       stdenv.cc.cc.lib
       texlive.combined.scheme-full

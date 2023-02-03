@@ -1,22 +1,22 @@
-{ config, pkgs, ...}:
+{ config, lib, pkgs, ... }:
+
+with lib;
 
 let
-  gnzsh-nix-theme = pkgs.fetchFromGitHub {
-    owner =  "Cobaltarena";
-    repo = "nix-gnzsh-theme";
-    rev = "1aa07214ed0e2dba5cbb3fcb243733400a9e80a9";
-    sha256 = "1gqhQBGmMNU6+1a4wAvYA8V3X5l4634p2g8ACONP6YA=";
-  };
+  customCfg = config.my.programs.zsh;
 
-  customDir = pkgs.stdenv.mkDerivation {
+  customTheme = pkgs.stdenv.mkDerivation {
+    src = pkgs.fetchFromGitHub {
+      owner =  "Cobaltarena";
+      repo = "nix-gnzsh-theme";
+      rev = "1aa07214ed0e2dba5cbb3fcb243733400a9e80a9";
+      sha256 = "1gqhQBGmMNU6+1a4wAvYA8V3X5l4634p2g8ACONP6YA=";
+    };
     name = "oh-my-zsh-custom-dir";
-    phases = [ "buildPhase" ];
-    buildPhase = ''
+    phases = [ "installPhase" ];
+    installPhase = ''
       mkdir -p $out/themes
-      echo ============================================
-      echo $out
-      echo ============================================
-      cp ${gnzsh-nix-theme}/gnzsh-nix.zsh-theme $out/themes/gnzsh-nix.zsh-theme
+      cp $src/gnzsh-nix.zsh-theme $out/themes/gnzsh-nix.zsh-theme
     '';
   };
 
@@ -42,54 +42,63 @@ let
   };
 in
 {
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions = true;
-    enableCompletion = true;
 
-    plugins = [
-      zsh-nix-shell
-      nix-zsh-completions
-    ];
+  options.my.programs.zsh.enable = (mkEnableOption "User buildSystem packages") // { default = true; };
 
-    sessionVariables = {
-      "ZSH_DISABLE_COMPFIX" = "true";
-      "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=10";
-      "VISUAL" = "emacs";
-      "EDITOR" =  "emacs";
-      "_ZO_ECHO" = "1"; # 'When set to 1, z will print the matched directory before navigating to it.
-      "_ZO_RESOLVE_SYMLINKS" = "1"; # When set to 1, z will resolve symlinks before adding directories to the database.
-    };
+  config = mkIf customCfg.enable {
+    programs.zsh = {
+      enable = true;
+      enableAutosuggestions = true;
+      enableCompletion = true;
 
-    shellAliases = {
-      "diff" = "diff -y --suppress-common-lines --color=always --width=105 -r -a";
-      "wifi-connect" = "nmcli device wifi";
+      plugins = [
+        zsh-nix-shell
+        nix-zsh-completions
+      ];
 
-      "gst" = "git status";
-      "ga" = "git add";
-      "gl" = "git pull";
-      "gp" = "git push";
-      "glog" = "git log --oneline --decorate --graph";
+      sessionVariables = {
+        "ZSH_DISABLE_COMPFIX" = "true";
+        "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=10";
+        "VISUAL" = "emacs";
+        "EDITOR" =  "emacs";
+        "_ZO_ECHO" = "1"; # 'When set to 1, z will print the matched directory before navigating to it.
+        "_ZO_RESOLVE_SYMLINKS" = "1"; # When set to 1, z will resolve symlinks before adding directories to the database.
+      };
 
-      "nixs-regenv" =''echo "use nix" >> .envrc; direnv allow'';
-      "nixf-regenv" =''echo "use flake" >> .envrc; direnv allow'';
-    };
+      shellAliases = {
+        "diff" = "diff -y --suppress-common-lines --color=always --width=105 -r -a";
 
-    initExtra = ''
+        "gst" = "git status";
+        "ga" = "git add";
+        "gl" = "git pull";
+        "gp" = "git push";
+        "glog" = "git log --oneline --decorate --graph";
+
+        "nix-regenv" =''echo "use nix" >> .envrc; direnv allow'';
+        "nixf-regenv" =''echo "use flake" >> .envrc; direnv allow'';
+      };
+
+      initExtra = ''
       eval "$(direnv hook zsh)"
       eval "$(zoxide init --hook pwd zsh)"
       source "$(fzf-share)/key-bindings.zsh"
       source "$(fzf-share)/completion.zsh"
     '';
-  };
+    };
 
-  programs.zsh.oh-my-zsh = {
-    enable = true;
-    custom = "${customDir}";
-    plugins = [
-      "colored-man-pages"
-      "git"
-    ];
-    theme = "gnzsh-nix";
+    programs.zsh.oh-my-zsh = {
+      enable = true;
+      custom = "${customTheme}";
+      plugins = [
+        "colored-man-pages"
+        "git"
+      ];
+      theme = "gnzsh-nix";
+    };
+
+    programs.fzf = {
+      defaultOptions = [ "--height 40%" "--border" ];
+      historyWidgetOptions = [ "--sort" "--exact" ];
+    };
   };
 }

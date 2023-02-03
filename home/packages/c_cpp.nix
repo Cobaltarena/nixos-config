@@ -13,7 +13,7 @@ in {
       clang-tools
       cppcheck
       criterion
-      gcc
+      # gcc
       glib.dev
       glib.out
       llvm

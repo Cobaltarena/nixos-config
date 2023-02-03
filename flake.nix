@@ -6,15 +6,7 @@
       owner = "NixOS";
       repo = "nixpkgs";
       ref = "nixos-unstable";
-      # rev = "a7ecde854aee5c4c7cd6177f54a99d2c1ff28a31";
     };
-
-    # nixpkgs-unstable-small = {
-    #   type = "github";
-    #   owner = "NixOS";
-    #   repo = "nixpkgs";
-    #   ref = "nixos-unstable-small";
-    # };
 
     home-manager = {
       type = "github";
@@ -22,6 +14,13 @@
       repo = "home-manager";
       ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixpkgs-unstable-small = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixpkgs";
+      ref = "nixos-unstable-small";
     };
 
     flake-utils = {
@@ -37,52 +36,94 @@
       repo = "nixos-hardware";
       ref = "master";
     };
+
+    darwin = {
+      type = "github";
+      owner = "LnL7";
+      repo = "nix-darwin";
+      ref = "master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     { self
     , nixpkgs
     , home-manager
+    , darwin
     , ... } @inputs:
     let
+      inherit (nixpkgs) lib;
       system = "x86_64-linux";
+      overlays = import ./overlay;
+      genPkgsWithOverlays = system: import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+      };
+      home-manager-special-args = rec {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.verbose = true;
+        nixpkgs.overlays = shared_overlays;
+      };
+      shared_overlays = [
+        (self: super: {
+          # packages accessible through pkgs.unstable.package
+          unstable = import inputs.nixpkgs-unstable-small {
+            inherit system;
+            nixpkgs.config.allowUnfree = true;
+          };
+        })
+      ] ++ builtins.attrValues self.overlays;
+      darwinSystemWrapper = system: extraModules:
+        let
+          pkgs = genPkgsWithOverlays system;
+
+        in
+          darwin.lib.darwinSystem
+            {
+              inherit system;
+              specialArgs =  { inherit lib pkgs inputs self darwin; };
+              modules = [
+                ./Doctolib.nix
+                home-manager.darwinModules.home-manager
+                (home-manager-special-args // {
+                  home-manager.users.thomas = import ./home {
+                    homePath = "/Users";
+                    username = "thomas";
+                    envOptions = {
+                      x = false;
+                      darwin = true;
+                    };
+                  };
+                })
+              ];
+            };
     in
       {
         # Home config
         nixosModules = {
-          home = {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.gawain = import ./home;
-            home-manager.verbose = true;
-          };
+          homeConfiguration = home-manager.nixosModule
+          {
+            home-manager.users.gawain = import ./home {
+              username = "gawain";
+              envOptions = {
+                x = true;
+                darwin = false;
+              };
+            } // home-manager-special-args;
           nix-path = {
             nix.nixPath = [
               "nixpkgs=${inputs.nixpkgs}"
             ];
           };
+          };
         };
 
-        overlays = import ./overlay;
-        # TODO
-        # System config
         nixosConfigurations =
           let
             system = "x86_64-linux";
-            shared_overlays = [
-              (self: super: {
-                # packages accessible through pkgs.unstable.package
-                unstable = import inputs.nixpkgs-unstable-small {
-                  inherit system;
-                  nixpkgs.config.allowUnfree = true;
-                };
-              })
-
-            ] ++ builtins.attrValues self.overlays;
-            sharedModules = [
-              home-manager.nixosModule
-              { nixpkgs.overlays = shared_overlays; }
-            ] ++ (nixpkgs.lib.attrValues self.nixosModules);
+            sharedModules = (nixpkgs.lib.attrValues self.nixosModules);
           in {
             camelot = nixpkgs.lib.nixosSystem rec {
               specialArgs = { inherit inputs; };
@@ -92,5 +133,9 @@
               ] ++ sharedModules;
             };
           };
+        processConfigurations = lib.mapAttrs (n: v: v n);
+        darwinConfigurations = {
+          doctolib = darwinSystemWrapper "aarch64-darwin" [ ./hosts/doctolib/default.nix ];
+        };
       };
 }

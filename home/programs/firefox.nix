@@ -2,5 +2,5 @@
 
 {
   # TODO
-  programs.firefox.enable = true;
+  programs.firefox.enable = ! pkgs.stdenv.hostPlatform.isDarwin;
 }
