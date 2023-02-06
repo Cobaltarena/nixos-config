@@ -10,6 +10,24 @@ rec {
       ./home.nix
     ];
 
+  homebrew = {
+    brewPrefix = "/opt/homebrew/bin/";
+    enable = true;
+    onActivation.autoUpdate = true;
+    # updates homebrew packages on activation,
+    # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
+    onActivation.upgrade = true;
+    brews = [
+      "llvm"
+    ];
+    casks = [
+      "alfred"
+      "logseq"
+      "openssl@1.1"
+      "rectangle"
+    ];
+  };
+
   nix = {
     package = pkgs.nixUnstable;
     useDaemon = true;

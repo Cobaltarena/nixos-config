@@ -12,11 +12,9 @@ in {
       ccls
       clang-tools
       cppcheck
-      criterion
       # gcc
       glib.dev
       glib.out
-      llvm
     ];
   };
 }

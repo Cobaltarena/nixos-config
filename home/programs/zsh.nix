@@ -74,15 +74,26 @@ in
         "gp" = "git push";
         "glog" = "git log --oneline --decorate --graph";
 
-        "nix-regenv" =''echo "use nix" >> .envrc; direnv allow'';
-        "nixf-regenv" =''echo "use flake" >> .envrc; direnv allow'';
+        "nix-regenv" = ''echo "use nix" >> .envrc; direnv allow'';
+        "nixf-regenv" = ''echo "use flake" >> .envrc; direnv allow'';
+        "ls" = "ls --color";
       };
 
       initExtra = ''
+      # Add condition if on darwin, /usr/bin is special and contain packages that cant be installed via nix
+      export PATH=/usr/bin:/opt/homebrew/bin:$PATH:
+
       eval "$(direnv hook zsh)"
       eval "$(zoxide init --hook pwd zsh)"
       source "$(fzf-share)/key-bindings.zsh"
       source "$(fzf-share)/completion.zsh"
+
+      # nvm
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+      export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+
     '';
     };
 

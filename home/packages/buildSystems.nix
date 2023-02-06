@@ -11,6 +11,15 @@ in {
   config = mkIf customCfg.enable {
     home.packages = with pkgs; [
       gnumake
+
+      ## test
+      pkg-config
+      libiconv
+      cmake
+      llvmPackages_14.llvm
+      automake
+      autoconf
+      autoconf-archive
     ];
   };
 

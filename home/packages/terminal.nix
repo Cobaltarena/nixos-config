@@ -5,13 +5,13 @@ with lib;
 let
   customCfg = config.my.packages.terminal;
 in {
-  options.my.packages.terminal.enable = (mkEnableOption "User terminal util packages") // { default = false; };
+  options.my.packages.terminal.enable = (mkEnableOption "User terminal util packages") // { default = true; };
 
   config = mkIf customCfg.enable {
 
     home.packages = with pkgs; [
       bat
-      binutils
+      coreutils
       direnv
       exa
       fd
@@ -36,6 +36,6 @@ in {
       zip
       zoxide
       zsh-autosuggestions
-    ];
+    ] ++ (if pkgs.stdenv.hostPlatform.isDarwin then [ pkgs.iterm2 ] else []);
   };
 }
