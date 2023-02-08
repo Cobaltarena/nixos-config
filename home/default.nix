@@ -5,6 +5,7 @@
   imports = [
     ./packages
     ./programs
+    ./doctoenv.nix
   ]
   ++ (if envOptions.x then [ ./x ] else [])
   ++ (if envOptions.darwin then [ ./darwin.nix ] else []);

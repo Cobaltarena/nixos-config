@@ -4,6 +4,12 @@
     nixpkgs.config = {
       allowUnfree = true;
       allowUnsupportedSystem = true;
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "vscode"
+      ];
+      permittedInsecurePackages = [
+        "qtwebkit-5.212.0-alpha4"
+      ];
     };
 
     users.users.thomas = {
@@ -14,11 +20,11 @@
     home-manager.users.thomas = {
       darwin = {
         installApps = true;
-        fullCopies = true;
       };
       my.packages = {
         buildSystems.enable = true;
         c_cpp.enable = true;
+        doctoenv.enable = false; # WIP
         fonts.enable = true;
         js.enable = true;
         misc.enable = true;

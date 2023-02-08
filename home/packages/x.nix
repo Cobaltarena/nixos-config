@@ -23,7 +23,6 @@ in {
       imagemagick
       networkmanagerapplet
       redshift
-      slack
       spotify
       teams
       thunderbird

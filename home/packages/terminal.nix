@@ -36,6 +36,6 @@ in {
       zip
       zoxide
       zsh-autosuggestions
-    ] ++ (if pkgs.stdenv.hostPlatform.isDarwin then [ pkgs.iterm2 ] else []);
+    ] ++ (if ! pkgs.stdenv.hostPlatform.isDarwin then [ pkgs.alacritty ] else []);
   };
 }

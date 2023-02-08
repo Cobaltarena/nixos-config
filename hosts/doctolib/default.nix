@@ -19,12 +19,18 @@ rec {
     onActivation.upgrade = true;
     brews = [
       "llvm"
+      "openssl@1.1"
     ];
     casks = [
       "alfred"
+      "docker"
+      "google-chrome"
+      "iterm2"
       "logseq"
-      "openssl@1.1"
+      "postico"
       "rectangle"
+      "slack"
+      "visual-studio-code"
     ];
   };
 
@@ -57,7 +63,17 @@ rec {
     "nix/channels/nixpkgs".source = inputs.nixpkgs.outPath;
     "nix/channels/home-manager".source = inputs.home-manager.outPath;
   };
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnsupportedSystem = true;
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "vscode"
+    ];
+    permittedInsecurePackages = [
+      "qtwebkit-5.212.0-alpha4"
+    ];
+  };
+
 
   time.timeZone = "Europe/Paris";
 
