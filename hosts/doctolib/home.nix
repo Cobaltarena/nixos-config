@@ -24,7 +24,7 @@
       my.packages = {
         buildSystems.enable = true;
         c_cpp.enable = true;
-        doctoenv.enable = false; # WIP
+        doctoenv.enable = true;
         fonts.enable = true;
         js.enable = true;
         misc.enable = true;

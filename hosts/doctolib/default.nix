@@ -23,10 +23,12 @@ rec {
     ];
     casks = [
       "alfred"
+      "alt-tab"
       "docker"
       "google-chrome"
       "iterm2"
       "logseq"
+      "monitorcontrol"
       "postico"
       "rectangle"
       "slack"

@@ -35,6 +35,7 @@ in {
       git
       graphviz
       postgresql
+      libyaml
 
       # ruby lsp
       rubyPackages_3_1.solargraph
@@ -70,6 +71,30 @@ in {
 
       # nix openssl_1_1 does not contain everything as opposed to openssl@1.1 from brew
       export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-        '';
+      export DOCTOLIB_EMAIL=thomas.crambert@doctolib.com
+      export DOCTOLIB_KUBE_REPO=~/Doctolib/kube
+      export DOCTOLIB_STAGING_USE_ADMIN_ROLE=0
+
+      # custom functions for db management
+      function dl_db_test_to_dev() {
+          echo "Migrating the test database (1/5)"
+          RAILS_ENV=test rails db:migrate
+          echo "Migrating the development database (2/5)"
+          RAILS_ENV=development rails db:migrate
+          echo "Dumping the doctolib-development database (3/5)"
+          pg_dump -h 127.0.0.1 --format=tar doctolib-development -f dev_dump
+          echo "Dumping the doctolib-test database (4/5)"
+          pg_dump -h 127.0.0.1 --format=tar doctolib-test -f test_dump
+          echo "Restoring the test database to the development database (5/5)"
+          pg_restore -h 127.0.0.1 --clean -d doctolib-development test_dump
+      }
+
+      function dl_db_restore_dev() {
+          echo "Restoring the dev dump to the development database"
+          pg_restore -h 127.0.0.1 --clean -d doctolib-development dev_dump
+          echo "Removing dumps"
+          rm dev_dump test_dump
+      }
+    '';
   };
 }

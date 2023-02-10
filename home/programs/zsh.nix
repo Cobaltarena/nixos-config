@@ -84,18 +84,6 @@ in
       eval "$(zoxide init --hook pwd zsh)"
       source "$(fzf-share)/key-bindings.zsh"
       source "$(fzf-share)/completion.zsh"
-
-      # Add condition if on darwin, /usr/bin is special and contain packages that cant be installed via nix
-      # Docker binary isnt the exact same needed for macos
-      export PATH=/usr/bin:/Applications/Docker.app/Contents/Resources/bin/:$PATH:/opt/homebrew/bin:
-
-      # nvm
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-      # nix openssl_1_1 does not contain everything as opposed to openssl@1.1 from brew
-      export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
     '';
     };
 
