@@ -19,12 +19,13 @@ in {
       docker-compose
       gnupg
       imagemagick
-      morgen
       numlockx
-      obsidian
       pulseaudio
       stdenv.cc.cc.lib
       texlive.combined.scheme-full
+      pdftk
+      steam
+      lutris
     ];
   };
 }

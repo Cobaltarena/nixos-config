@@ -10,7 +10,7 @@ in {
   config = mkIf customCfg.enable {
     home.packages = with pkgs; [
       fira
-      fira-mono
+      # fira-mono
       fira-code
 
       font-awesome # font and icon toolkit

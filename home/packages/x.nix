@@ -24,7 +24,7 @@ in {
       networkmanagerapplet
       redshift
       slack
-      spotify
+      # spotify # broken at the moment, cf https://github.com/NixOS/nixpkgs/pull/216332
       teams
       thunderbird
       xautolock

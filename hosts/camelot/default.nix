@@ -20,12 +20,25 @@
   };
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices = {
-       root = {
-	       device = "/dev/disk/by-uuid/c7cb0f50-758f-4c2a-98e9-09feb3e639a9";
-         preLVM = true;
-       };
+    root = {
+      device = "/dev/disk/by-uuid/c7cb0f50-758f-4c2a-98e9-09feb3e639a9";
+      preLVM = true;
+    };
   };
-
+  boot.supportedFilesystems = [
+    "btrfs"
+    "ext2"
+    "ext3"
+    "ext4"
+    "exfat"
+    "f2fs"
+    "fat8"
+    "fat16"
+    "fat32"
+    "ntfs"
+    "xfs"
+    # "zfs"
+  ];
   boot.extraModulePackages = [ pkgs.bcc ];
 
   boot.kernelParams = [
@@ -61,7 +74,6 @@
     "nix/channels/nixpkgs".source = inputs.nixpkgs.outPath;
     "nix/channels/home-manager".source = inputs.home-manager.outPath;
   };
-  nixpkgs.config.allowUnfree = true;
 
   time.timeZone = "Europe/Paris";
 
@@ -105,7 +117,7 @@
     bcc
     cron
     git
-    libsForQt515.qtgraphicaleffects
+    libsForQt5.qt5.qtgraphicaleffects
     sddm
     vim
     wget
@@ -137,5 +149,32 @@
   # firmware update
   services.fwupd.enable = true;
   documentation.dev.enable = true;
+
+  services.printing.browsing = true;
+  services.printing.drivers = with pkgs; [ gutenprint canon-cups-ufr2 cups-filters ];
+  services.printing.browsedConf = ''
+      BrowseDNSSDSubTypes _cups,_print
+      BrowseLocalProtocols all
+      BrowseRemoteProtocols all
+      CreateIPPPrinterQueues All
+
+      BrowseProtocols all
+    '';
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish.addresses = true;
+    publish.domain = true;
+    publish.enable = true;
+    publish.userServices = true;
+    publish.workstation = true;
+    extraServiceFiles.ssh = "${pkgs.avahi}/etc/avahi/services/ssh.service";
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
 }
 

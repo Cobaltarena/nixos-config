@@ -1,10 +1,15 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [
-      "electron-15.5.2" # morgen
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "discord"
+      "slack"
+      "spotify"
+      "steam"
+      "steam-original"
+      "steam-run"
+      "teams"
     ];
   };
   home-manager.users.gawain = {
