@@ -1,22 +1,24 @@
-{ stdenv, fetchFromGitHub }:
+{ pkgs, stdenv, fetchFromGitHub }:
+
 {
   sddm-candy-sugar = stdenv.mkDerivation rec {
     pname = "sddm-candy-sugar-theme";
     version = "2.1";
-    dontBuild = true;
-    installPhase = ''
-      mkdir -p $out/share/sddm/themes
-      echo ============================================
-      echo $out
-      echo ============================================
-      cp -aR $src $out/share/sddm/themes/candy-sugar
-      ls -la $out/share/sddm/themes
-    '';
     src = fetchFromGitHub {
       owner = "Cobaltarena";
       repo = "sddm-theme";
-      rev = "c29c8b4a84da66e87f874481f5c7d75562a93cce";
-      sha256 = "j52RKk4r2LJHsCXXYJxyjTlwKabuXcI65bYMrLxN7Io=";
+      rev = "c6629463b762431304b98b9eeda0af4a9c480c0a";
+      sha256 = "WEHvd6dk3G18cgBjs1XNTAWg6MlSrB3gt9EMRJVrOCQ=";
     };
+
+    propagatedBuildInputs = with pkgs; [
+      libsForQt5.qt5.qtgraphicaleffects
+    ];
+
+    dontWrapQtApps = true;
+    installPhase = ''
+      mkdir -p $out/share/sddm/themes
+      cp -aR $src $out/share/sddm/themes/candy-sugar
+    '';
   };
 }

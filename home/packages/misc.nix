@@ -17,11 +17,12 @@ in {
       gnupg
       imagemagick
       numlockx
-      podman
       pulseaudio
       stdenv.cc.cc.lib
       texlive.combined.scheme-full
-
+      pdftk
+      steam
+      lutris
     ];
   };
 }

@@ -122,27 +122,31 @@ in {
 	      "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
         "${mod}+Tab" = "exec ${pkgs.rofi}/bin/rofi -show window";
         "${mod}+f" = "exec firefox";
+        "${mod}+Shift+f" = "fullscreen toggle";
         "${mod}+x" = "exec emacs";
 
 	      "${mod}+1" = "workspace number 1:(1)";
 	      "${mod}+2" = "workspace number 2:(2)";
 	      "${mod}+3" = "workspace number 3:(3)";
         "${mod}+4" = "workspace number 4:(4)";
-	      "${mod}+Ctrl+1" = "workspace number 5:(C1)";
-	      "${mod}+Ctrl+2" = "workspace number 6:(C2)";
-	      "${mod}+Ctrl+3" = "workspace number 7:(C3)";
-	      "${mod}+Ctrl+4" = "workspace number 8:(C4)";
-
+        "${mod}+5" = "workspace number 5:(5)";
+	      "${mod}+Ctrl+1" = "workspace number 6:(C1)";
+	      "${mod}+Ctrl+2" = "workspace number 7:(C2)";
+	      "${mod}+Ctrl+3" = "workspace number 8:(C3)";
+	      "${mod}+Ctrl+4" = "workspace number 9:(C4)";
+	      "${mod}+Ctrl+5" = "workspace number 10:(C5)";
 
 
  	    "${mod}+Shift+1" = "move container to workspace number 1:(1)";
 	      "${mod}+Shift+2" = "move container to workspace number 2:(2)";
 	      "${mod}+Shift+3" = "move container to workspace number 3:(3)";
 	      "${mod}+Shift+4" = "move container to workspace number 4:(4)";
-	      "${mod}+Ctrl+Shift+1" = "move container to workspace number 5:(C1)";
-	      "${mod}+Ctrl+Shift+2" = "move container to workspace number 6:(C2)";
-	      "${mod}+Ctrl+Shift+3" = "move container to workspace number 7:(C3)";
-	      "${mod}+Ctrl+Shift+4" = "move container to workspace number 8:(C4)";
+        "${mod}+Shift+5" = "move container to workspace number 5:(5)";
+	      "${mod}+Ctrl+Shift+1" = "move container to workspace number 6:(C1)";
+	      "${mod}+Ctrl+Shift+2" = "move container to workspace number 7:(C2)";
+	      "${mod}+Ctrl+Shift+3" = "move container to workspace number 8:(C3)";
+	      "${mod}+Ctrl+Shift+4" = "move container to workspace number 9:(C4)";
+        "${mod}+Ctrl+Shift+5" = "move container to workspace number 10:(C5)";
 
         "${mod}+Shift+e" = ''mode "${logoutMode}"'';
 	      "${mod}+Shift+r" = "restart";
@@ -155,6 +159,8 @@ in {
         "${mod}+F1" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
         "${mod}+F2" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
         "${mod}+F3" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%";
+        "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
+        "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%";
 
         "${mod}+F5" =  "exec light -U 5";
         "${mod}+F6" = "exec light -A 5";

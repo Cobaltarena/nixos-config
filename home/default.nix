@@ -1,5 +1,8 @@
-{ envOptions ? {}, homePath ? "/home", username, ... }@args:
+{ isDarwin, username ? "gawain", ... }@args:
 
+let
+  homePath = if isDarwin then "/Users" else "/home";
+in
 {
   fonts.fontconfig.enable = true;
   imports = [
@@ -7,8 +10,7 @@
     ./programs
     ./doctoenv.nix
   ]
-  ++ (if envOptions.x then [ ./x ] else [])
-  ++ (if envOptions.darwin then [ ./darwin.nix ] else []);
+  ++ (if isDarwin then [ ./darwin.nix ] else [ ./x ]);
   home.homeDirectory = "${homePath}/${username}";
   home.stateVersion = "21.11";
   home.username = "${username}";

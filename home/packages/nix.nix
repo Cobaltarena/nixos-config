@@ -9,7 +9,6 @@ in {
 
   config= mkIf customCfg.enable {
     home.packages = with pkgs; [
-      # nix-linter
       nix-prefetch-git
       nix-prefetch-github
       nixpkgs-fmt

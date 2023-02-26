@@ -11,7 +11,7 @@ in {
     programs.alacritty = {
       enable = true;
       settings = {
-        font.size = 14;
+        font.size = 12;
         window_opacity = 0.5;
         mouse.hide = true;
         window.dynamic_title = true;

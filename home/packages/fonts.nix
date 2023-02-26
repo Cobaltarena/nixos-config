@@ -19,8 +19,6 @@ in {
       hicolor-icon-theme
       powerline-fonts
       unifont
-      nerdfonts
-      weather-icons
     ];
   };
 }

@@ -1,3 +1,5 @@
+{pkgs, ...}:
+
 final: prev: {
   darwinRebuildSwitch = pkgs.WriteShellScriptBin "darswitch" ''
       nix build -L -j 4 ~/.config/darwin#darwinConfigurations.doctolib.system --impure
