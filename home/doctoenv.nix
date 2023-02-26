@@ -29,6 +29,13 @@ in {
       libyaml
       rustc # probably missing many things like rust-lldb
       cargo
+      pango.dev
+      cairo.dev
+      libpng.dev
+      glib.dev
+      harfbuzz.dev
+      freetype.dev
+      pixman
       # wkhtmltopdf # dep not building
 
       cmake
@@ -36,11 +43,20 @@ in {
       graphviz
       postgresql
       libyaml
+      llvmPackages_14.clang
+      llvmPackages_14.llvm
 
-      # ruby lsp
+      # ruby
+      rubyPackages_3_1.rubocop
       rubyPackages_3_1.solargraph
+      rubyPackages_3_1.syntax_tree-rbs
 
-      # app
+      # terraform
+      terraform-ls
+
+      # flakky
+      gh
+      cloudflared
     ];
 
     programs.rbenv = {
@@ -52,8 +68,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "rbenv";
             repo = "ruby-build";
-            rev = "a6976a5af32443ae0af41fa7713c6b1e8d629ed3";
-            sha256 = "PYl6tMrOnr16z90XI56GO2/xhB1cenbxhXUFxF5gQdk=";
+            rev = "4d2e1cc08f3e13c255a427551a2c43aa8caa7b67";
+            sha256 = "/ZJZ6EAZOfk70yGXKJEvYDWSKAIwq8XSomcjd1hS/r0=";
           };
         }
       ];
@@ -70,10 +86,16 @@ in {
       [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
       # nix openssl_1_1 does not contain everything as opposed to openssl@1.1 from brew
-      export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+      # for some reason, I cant change the default system include path used by autotools for ruby dependencies
+      # on top of that, the flags to specify the include dir and the lib dir does not seem to work through rbenv
+      export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1) --with-libyaml-dir=$(brew --prefix libyaml)"
       export DOCTOLIB_EMAIL=thomas.crambert@doctolib.com
       export DOCTOLIB_KUBE_REPO=~/Doctolib/kube
       export DOCTOLIB_STAGING_USE_ADMIN_ROLE=0
+      export PKG_CONFIG_PATH="${pkgs.pixman}/lib/pkgconfig:${pkgs.cairo.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
+      export PKG_CONFIG_PATH="${pkgs.pango.dev}/lib/pkgconfig:${pkgs.libpng.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
+      export PKG_CONFIG_PATH="${pkgs.glib.dev}/lib/pkgconfig:${pkgs.harfbuzz.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
+      export PKG_CONFIG_PATH="${pkgs.freetype.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
 
       # custom functions for db management
       function dl_db_test_to_dev() {
