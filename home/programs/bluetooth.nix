@@ -1,10 +1,11 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
 let
   customCfg = config.my.programs.bluetooth;
-in {
+in
+{
 
   options.my.programs.bluetooth.enable = (mkEnableOption "Bluetooth options") // { default = false; };
 

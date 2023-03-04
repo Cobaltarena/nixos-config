@@ -6,37 +6,35 @@
 }:
 
 let
-  darwinSystemWrapper = system: extraModules:
+  darwinSystemWrapper = { system, extraModules, hostname }:
     let
-      pkgs = helpers.genPkgsWithOverlays system;
-    in
-      inputs.darwin.lib.darwinSystem {
-        inherit system;
-        specialArgs =  {
-          inherit lib pkgs inputs self;
-          inherit (inputs) darwin;
-        };
-        modules = [
-          ./Doctolib.nix
-          inputs.home-manager.darwinModules.home-manager
-          (home-manager-special-args // {
-            nixpkgs.overlays = helpers.defineSharedOverlays {
-              inherit system;
-            } ++ builtins.attrValues self.overlays;
-            home-manager.users.thomas = import ./home {
-              homePath = "/Users";
-              username = "thomas";
-              envOptions = {
-                x = false;
-                darwin = true;
-              };
+      modules = [
+        inputs.home-manager.darwinModules.home-manager
+        ({
+          home-manager = {
+            users.${hostname} = import ../home {
+              username = "${hostname}";
+              isDarwin = true;
             };
-          })
-        ];
+          } // home-manager-special-args;
+          nixpkgs.overlays = helpers.defineSharedOverlays {
+            inherit system;
+            baseInputChannel = inputs.nixpkgs-unstable-small;
+          };
+        })
+      ] ++ extraModules;
+    in
+    inputs.darwin.lib.darwinSystem {
+      inherit system modules;
+      specialArgs = {
+        inherit inputs;
       };
+    };
 in
 {
-  doctolib = darwinSystemWrapper "aarch64-darwin" [
-    ./hosts/doctolib/default.nix
-  ];
+  doctolib = darwinSystemWrapper {
+    system = "aarch64-darwin";
+    extraModules = [ ../Doctolib.nix ];
+    hostname = "thomas";
+  };
 }

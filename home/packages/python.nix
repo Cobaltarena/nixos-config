@@ -4,7 +4,8 @@ with lib;
 
 let
   customCfg = config.my.packages.python;
-in {
+in
+{
   options.my.packages.python.enable = (mkEnableOption "User Python dev packages") // { default = false; };
 
   config = mkIf customCfg.enable {
@@ -20,7 +21,7 @@ in {
 
       python3Packages.python-lsp-server
       python3Packages.python-lsp-black
-#      python3Packages.python-lsp-isort
+      #      python3Packages.python-lsp-isort
     ];
   };
 }

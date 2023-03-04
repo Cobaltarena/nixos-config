@@ -4,7 +4,8 @@ with lib;
 
 let
   customCfg = config.my.programs.emacs;
-in {
+in
+{
 
   options.my.programs.emacs.enable = (mkEnableOption "Enable emacs") // { default = true; };
 

@@ -57,7 +57,7 @@
       (text "Blank")
       (text "Memory")
       (text "Swap")
-    ]) // (with config.lib.htop; rightMeters  [
+    ]) // (with config.lib.htop; rightMeters [
       (text "Systemd")
       (text "Tasks")
       (text "LoadAverage")

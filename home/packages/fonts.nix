@@ -4,7 +4,8 @@ with lib;
 
 let
   customCfg = config.my.packages.fonts;
-in {
+in
+{
   options.my.packages.fonts.enable = (mkEnableOption "User font packages") // { default = true; };
 
   config = mkIf customCfg.enable {

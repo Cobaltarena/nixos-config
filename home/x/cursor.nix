@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ...}:
+{ pkgs, lib, config, ... }:
 
 {
   home.pointerCursor = lib.mkIf config.my.packages.x.enable {

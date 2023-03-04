@@ -4,7 +4,8 @@ with lib;
 
 let
   customCfg = config.my.packages.x;
-in {
+in
+{
   options.my.packages.x.enable = (mkEnableOption "X related packages") // { default = true; };
 
   config = mkIf customCfg.enable {

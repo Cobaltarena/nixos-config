@@ -4,7 +4,8 @@ with lib;
 
 let
   customCfg = config.my.programs.direnv;
-in {
+in
+{
   options.my.programs.direnv.enable = (mkEnableOption "Direnv config") // { default = true; };
 
   config = mkIf customCfg.enable {

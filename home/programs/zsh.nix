@@ -7,7 +7,7 @@ let
 
   customTheme = pkgs.stdenv.mkDerivation {
     src = pkgs.fetchFromGitHub {
-      owner =  "Cobaltarena";
+      owner = "Cobaltarena";
       repo = "nix-gnzsh-theme";
       rev = "1aa07214ed0e2dba5cbb3fcb243733400a9e80a9";
       sha256 = "1gqhQBGmMNU6+1a4wAvYA8V3X5l4634p2g8ACONP6YA=";
@@ -60,7 +60,7 @@ in
         "ZSH_DISABLE_COMPFIX" = "true";
         "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=10";
         "VISUAL" = "emacs";
-        "EDITOR" =  "emacs";
+        "EDITOR" = "emacs";
         "_ZO_ECHO" = "1"; # 'When set to 1, z will print the matched directory before navigating to it.
         "_ZO_RESOLVE_SYMLINKS" = "1"; # When set to 1, z will resolve symlinks before adding directories to the database.
       };
@@ -80,11 +80,12 @@ in
       };
 
       initExtra = ''
-      eval "$(direnv hook zsh)"
-      eval "$(zoxide init --hook pwd zsh)"
-      source "$(fzf-share)/key-bindings.zsh"
-      source "$(fzf-share)/completion.zsh"
-    '';
+        export PATH=/etc/profiles/per-user/$USER/bin/:$PATH
+        eval "$(direnv hook zsh)"
+        eval "$(zoxide init --hook pwd zsh)"
+        source "$(fzf-share)/key-bindings.zsh"
+        source "$(fzf-share)/completion.zsh"
+      '';
     };
 
     programs.zsh.oh-my-zsh = {

@@ -4,7 +4,8 @@ with lib;
 
 let
   customCfg = config.my.packages.terminal;
-in {
+in
+{
   options.my.packages.terminal.enable = (mkEnableOption "User terminal util packages") // { default = true; };
 
   config = mkIf customCfg.enable {
@@ -36,6 +37,6 @@ in {
       zip
       zoxide
       zsh-autosuggestions
-    ] ++ (if ! pkgs.stdenv.hostPlatform.isDarwin then [ pkgs.alacritty ] else []);
+    ] ++ (if ! pkgs.stdenv.hostPlatform.isDarwin then [ pkgs.alacritty ] else [ ]);
   };
 }

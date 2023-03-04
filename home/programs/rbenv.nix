@@ -1,9 +1,10 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 with lib;
 
 let
   customCfg = config.my.programs.ruby;
-in {
+in
+{
 
   options.my.programs.ruby.enable = (mkEnableOption "Default terminal options") // { default = true; };
 

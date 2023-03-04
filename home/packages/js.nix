@@ -4,7 +4,8 @@ with lib;
 
 let
   customCfg = config.my.packages.python;
-in {
+in
+{
   options.my.packages.js.enable = (mkEnableOption "User Js/Ts dev packages") // { default = true; };
 
   config = mkIf customCfg.enable {

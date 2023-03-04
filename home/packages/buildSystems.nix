@@ -4,7 +4,8 @@ with lib;
 
 let
   customCfg = config.my.packages.buildSystems;
-in {
+in
+{
 
   options.my.packages.buildSystems.enable = (mkEnableOption "User buildSystem packages") // { default = true; };
 

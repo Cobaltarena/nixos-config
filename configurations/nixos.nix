@@ -6,7 +6,7 @@
 }:
 
 let
-  nixosModuleWrapper = {system, extraModules, hostname }:
+  nixosModuleWrapper = { system, extraModules, hostname }:
     let
       nixosModules = {
         home = rec {
@@ -25,15 +25,19 @@ let
         };
       };
       modules = [
-        inputs.home-manager.nixosModule {
-          nixpkgs.overlays = helpers.defineSharedOverlays { inherit system; };
-          }
+        inputs.home-manager.nixosModule
+        {
+          nixpkgs.overlays = helpers.defineSharedOverlays {
+            inherit system;
+            baseInputChannel = inputs.nixpkgs-unstable-small;
+          };
+        }
       ] ++ extraModules ++ (inputs.nixpkgs.lib.attrValues nixosModules);
     in
-      inputs.nixpkgs.lib.nixosSystem rec {
-        specialArgs = { inherit inputs; };
-        inherit modules system;
-      };
+    inputs.nixpkgs.lib.nixosSystem rec {
+      specialArgs = { inherit inputs; };
+      inherit modules system;
+    };
 in
 {
   camelot = nixosModuleWrapper {

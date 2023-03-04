@@ -4,7 +4,8 @@ with lib;
 
 let
   customCfg = config.my.packages.doctoenv;
-in {
+in
+{
 
   options.my.packages.doctoenv.enable = (mkEnableOption "Available packages on nixpkgs required to have a working env") // { default = false; };
 
@@ -82,8 +83,8 @@ in {
 
       # nvm
       export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
       # nix openssl_1_1 does not contain everything as opposed to openssl@1.1 from brew
       # for some reason, I cant change the default system include path used by autotools for ruby dependencies

@@ -4,7 +4,8 @@ with lib;
 
 let
   customCfg = config.my.packages.c_cpp;
-in {
+in
+{
   options.my.packages.c_cpp.enable = (mkEnableOption "User C/C++ dev packages") // { default = true; };
 
   config = mkIf customCfg.enable {

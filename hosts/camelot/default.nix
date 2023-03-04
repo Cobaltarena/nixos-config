@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./x/i3.nix
       ./x/sddm.nix
@@ -81,7 +82,7 @@
     hostName = "camelot"; # Define your hostname.
     networkmanager.enable = true;
     extraHosts = ''
-       127.0.0.1 gitea droneci
+      127.0.0.1 gitea droneci
     '';
   };
 
@@ -153,13 +154,13 @@
   services.printing.browsing = true;
   services.printing.drivers = with pkgs; [ gutenprint canon-cups-ufr2 cups-filters ];
   services.printing.browsedConf = ''
-      BrowseDNSSDSubTypes _cups,_print
-      BrowseLocalProtocols all
-      BrowseRemoteProtocols all
-      CreateIPPPrinterQueues All
+    BrowseDNSSDSubTypes _cups,_print
+    BrowseLocalProtocols all
+    BrowseRemoteProtocols all
+    CreateIPPPrinterQueues All
 
-      BrowseProtocols all
-    '';
+    BrowseProtocols all
+  '';
   services.avahi = {
     enable = true;
     nssmdns = true;

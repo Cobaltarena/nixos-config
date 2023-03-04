@@ -4,7 +4,8 @@ with lib;
 
 let
   customCfg = config.my.packages.yubikey;
-in {
+in
+{
 
   options.my.packages.yubikey.enable = (mkEnableOption "User Security Auth with yubico") // { default = true; };
 

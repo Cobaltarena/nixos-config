@@ -51,7 +51,8 @@
     , nixpkgs
     , home-manager
     , darwin
-    , ... } @inputs:
+    , ...
+    } @inputs:
     let
       inherit (nixpkgs) lib;
       system = "x86_64-linux";
@@ -62,26 +63,26 @@
         useUserPackages = true;
         verbose = true;
       };
-      helpers = import ./helpers.nix { inherit inputs; };
+      helpers = import ./helpers.nix;
     in
-      {
-        darwinConfigurations = import ./configurations/darwin.nix {
-          inherit
-            helpers
-            home-manager-special-args
-            inputs
-            lib
-            self
+    {
+      darwinConfigurations = import ./configurations/darwin.nix {
+        inherit
+          helpers
+          home-manager-special-args
+          inputs
+          lib
+          self
           ;
-        };
-        nixosConfigurations = import ./configurations/nixos.nix {
-          inherit
-            helpers
-            home-manager-special-args
-            inputs
-            lib
-            self
-          ;
-        };
       };
+      nixosConfigurations = import ./configurations/nixos.nix {
+        inherit
+          helpers
+          home-manager-special-args
+          inputs
+          lib
+          self
+          ;
+      };
+    };
 }

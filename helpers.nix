@@ -1,16 +1,14 @@
-{ inputs }:
-
 {
-  defineSharedOverlays = { system }: [
+  defineSharedOverlays = { system, baseInputChannel }: [
     (self: super: {
       # packages accessible through pkgs.unstable.package
-      unstable = import inputs.nixpkgs-unstable-small {
+      unstable = import baseInputChannel {
         inherit system;
         inputs.nixpkgs.config.allowUnfree = true;
       };
     })
   ];
-  genPkgsWithOverlays = { system }: import inputs.nixpkgs {
+  genPkgsWithOverlays = { system, inputChannel }: import inputChannel {
     inherit system;
     config.allowUnfree = true;
   };

@@ -1,9 +1,10 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 with lib;
 
 let
   customCfg = config.my.programs.terminal;
-in {
+in
+{
 
   options.my.programs.terminal.enable = (mkEnableOption "Default terminal options") // { default = true; };
 
