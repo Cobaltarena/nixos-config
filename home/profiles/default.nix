@@ -1,6 +1,7 @@
 {
   imports = [
     ./desktop
+    ./custom
     # ./editors
     # ./gaming
     ./languages

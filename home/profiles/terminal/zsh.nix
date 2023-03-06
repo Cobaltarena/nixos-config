@@ -44,12 +44,22 @@ in
     home.packages = with pkgs; [
       oh-my-zsh
       zsh-autosuggestions
+      # zsh-powerlevel10k
 
       fira
-      roboto-mono
+      font-awesome
       hicolor-icon-theme
-      powerline-fonts
+      roboto-mono
       unifont
+      material-design-icons
+      emacsPackages.octicons
+      emacs-all-the-icons-fonts
+      weather-icons
+      unifont
+      nerdfonts
+      gyre-fonts
+      dejavu_fonts
+      meslo-lgs-nf
 
       # TOCHECK
       # zsh-fzf-tab
@@ -68,6 +78,16 @@ in
       plugins = [
         zsh-nix-shell
         nix-zsh-completions
+        # {
+        #   name = "powerlevel10k";
+        #   src = pkgs.zsh-powerlevel10k;
+        #   file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        # }
+        # {
+        #   name = "powerlevel10k-config";
+        #   src = lib.cleanSource ./p10k-config;
+        #   file = "p10k.zsh";
+        # }
       ];
 
       sessionVariables = {
@@ -99,6 +119,7 @@ in
         eval "$(zoxide init --hook pwd zsh)"
         source "$(fzf-share)/key-bindings.zsh"
         source "$(fzf-share)/completion.zsh"
+        # export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
       '';
     };
 
@@ -106,8 +127,11 @@ in
       enable = true;
       custom = "${customTheme}";
       plugins = [
+        "branch"
         "colored-man-pages"
+        "fzf"
         "git"
+        "git-prompt"
       ];
       theme = "gnzsh-nix";
     };

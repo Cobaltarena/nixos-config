@@ -8,6 +8,8 @@ in
     home.packages = with pkgs; [
       coreutils
       file
+      gnugrep
+      gnused
       killall
       unzip
       zip

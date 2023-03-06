@@ -1,15 +1,10 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-
 let
-  customCfg = config.my.packages.doctoenv;
+  configOptionEnabled = config.profiles.custom.doctoenv.enable;
 in
 {
-
-  options.my.packages.doctoenv.enable = (mkEnableOption "Available packages on nixpkgs required to have a working env") // { default = false; };
-
-  config = mkIf customCfg.enable {
+  config = lib.mkIf configOptionEnabled {
     ## REQUIRED PACKAGES
     home.packages = with pkgs; [
 
