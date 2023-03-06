@@ -10,27 +10,27 @@ in
 
   config = mkIf customCfg.enable {
     home.packages = with pkgs; [
-      arandr
-      betterlockscreen # i3lockscreen
-      bibata-cursors
-      blueman
-      bluez
+      # arandr
+      # betterlockscreen # i3lockscreen
+      # bibata-cursors
+      # blueman
+      # bluez
       discord
       evince
-      feh
-      flameshot
+      # feh
+      # flameshot
       gimp
-      i3wsr # rename workspace dynamically
+      # i3wsr # rename workspace dynamically
       imagemagick
-      networkmanagerapplet
-      redshift
+      # networkmanagerapplet
+      # redshift
       spotify
-      teams
-      thunderbird
-      xautolock
-      xidlehook
-      xsel
-      xss-lock
+      # | teams
+      # | thunderbird
+      # xautolock
+      # xidlehook
+      # xxsel
+      # xss-lock
     ];
   };
 }

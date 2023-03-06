@@ -6,11 +6,12 @@ in
 {
   fonts.fontconfig.enable = true;
   imports = [
-    ./packages
-    ./programs
-    ./doctoenv.nix
-  ]
-  ++ (if isDarwin then [ ./darwin.nix ] else [ ./x ]);
+    # ./packages
+    # ./programs
+    ./options
+    ./profiles
+    # ./doctoenv.nix
+  ] ++ (if isDarwin then [ ./darwin.nix ] else [ ]); # TODO: FIXME
   home.homeDirectory = "${homePath}/${username}";
   home.stateVersion = "21.11";
   home.username = "${username}";

@@ -10,16 +10,16 @@ in
 
   config = mkIf customCfg.enable {
     home.packages = with pkgs; [
-      fira
-      fira-code
+      # fira
+      # fira-code
 
-      font-awesome # font and icon toolkit
-      meslo-lgs-nf # emacs font
-      roboto-mono
+      # font-awesome # font and icon toolkit
+      # meslo-lgs-nf # emacs font
+      # roboto-mono
 
-      hicolor-icon-theme
-      powerline-fonts
-      unifont
+      # hicolor-icon-theme
+      # powerline-fonts
+      # unifont
     ];
   };
 }

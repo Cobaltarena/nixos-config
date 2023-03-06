@@ -19,22 +19,45 @@
 
   home-manager.users.thomas = {
     darwin = {
-      installApps = true;
+      installApps = false;
     };
-    my.packages = {
-      buildSystems.enable = true;
-      c_cpp.enable = true;
-      doctoenv.enable = true;
-      fonts.enable = true;
-      js.enable = true;
-      misc.enable = true;
-      nix.enable = true;
-      python.enable = true;
-      terminal.enable = true;
-      x.enable = false;
-      yubikey.enable = false; # not supported on darwin
+    profiles = {
+      desktop.enable = false;
+      gaming.enable = false;
+
+      custom.doctoenv.enable = true;
+
+      editors = {
+        enable = true;
+        emacs = true;
+      };
+
+      languages = {
+        enable = true;
+        c_cpp = false;
+        js = true;
+        nix = true;
+        python = false;
+        ruby = true;
+      };
+
+      terminal = {
+        enable = true;
+        fileSystem = true;
+        git = true;
+        linuxTools = false;
+        man = true;
+        monitoring = true;
+        terminalEmulator = false;
+        textProcessing = true;
+        zsh = true;
+      };
+      system = {
+        # TODO
+        enable = false;
+      };
+
     };
-    # home.stateVersion = "23.05";
   };
 
 }

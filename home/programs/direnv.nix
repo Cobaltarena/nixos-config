@@ -9,8 +9,8 @@ in
   options.my.programs.direnv.enable = (mkEnableOption "Direnv config") // { default = true; };
 
   config = mkIf customCfg.enable {
-    programs.direnv.enable = true;
-    programs.direnv.nix-direnv.enable = true;
-    programs.direnv.nix-direnv.enableFlakes = true;
+    # programs.direnv.enable = true;
+    # programs.direnv.nix-direnv.enable = true;
+    # programs.direnv.nix-direnv.enableFlakes = true;
   };
 }

@@ -1,9 +1,7 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-
 let
-  customCfg = config.my.programs.zsh;
+  configOptionEnabled = config.profiles.terminal.enable && config.profiles.terminal.zsh;
 
   customTheme = pkgs.stdenv.mkDerivation {
     src = pkgs.fetchFromGitHub {
@@ -42,10 +40,26 @@ let
   };
 in
 {
+  config = lib.mkIf configOptionEnabled {
+    home.packages = with pkgs; [
+      oh-my-zsh
+      zsh-autosuggestions
 
-  options.my.programs.zsh.enable = (mkEnableOption "User buildSystem packages") // { default = true; };
+      fira
+      roboto-mono
+      hicolor-icon-theme
+      powerline-fonts
+      unifont
 
-  config = mkIf customCfg.enable {
+      # TOCHECK
+      # zsh-fzf-tab
+      # zsh-forgit
+      # zsh-you-should-use
+      # zsh-syntax-highlighting
+      # zsh-fast-syntax-highlighting
+      # cod
+    ];
+
     programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
@@ -96,11 +110,6 @@ in
         "git"
       ];
       theme = "gnzsh-nix";
-    };
-
-    programs.fzf = {
-      # defaultOptions = [ "--height 40%" "--border" ];
-      # historyWidgetOptions = [ "--sort" "--exact" ];
     };
   };
 }

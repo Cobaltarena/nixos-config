@@ -60,22 +60,6 @@ in
       cloudflared
     ];
 
-    programs.rbenv = {
-      enable = true;
-      enableZshIntegration = true;
-      plugins = [
-        {
-          name = "ruby-build";
-          src = pkgs.fetchFromGitHub {
-            owner = "rbenv";
-            repo = "ruby-build";
-            rev = "4d2e1cc08f3e13c255a427551a2c43aa8caa7b67";
-            sha256 = "/ZJZ6EAZOfk70yGXKJEvYDWSKAIwq8XSomcjd1hS/r0=";
-          };
-        }
-      ];
-    };
-
     programs.zsh.initExtra = ''
       # Add condition if on darwin, /usr/bin is special and contain packages that cant be installed via nix
       # Docker binary isnt the exact same needed for macos

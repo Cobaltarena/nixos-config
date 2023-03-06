@@ -10,15 +10,16 @@ in
   config = mkIf customCfg.enable {
 
     home.packages = with pkgs; [
-      zlib
+      # direnv
+      # zlib
       rbenv
-      (aspellWithDicts (dicts: with dicts; [ en en-computers en-science fr ]))
+      # (aspellWithDicts (dicts: with dicts; [ en en-computers en-science fr ]))
       docker
       docker-compose
-      gnupg
+      # gnupg
       imagemagick
-      numlockx
-      pulseaudio
+      # numlockx
+      # pulseaudio
       stdenv.cc.cc.lib
       texlive.combined.scheme-full
       # pdftk

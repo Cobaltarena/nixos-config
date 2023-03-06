@@ -11,32 +11,32 @@ in
   config = mkIf customCfg.enable {
 
     home.packages = with pkgs; [
-      bat
-      coreutils
-      direnv
-      exa
-      fd
-      file
-      fzf
-      git-lfs
-      graphviz
-      htop
-      jq
-      killall
-      man-db
-      man-pages
-      nix-zsh-completions
+      # bat
+      # coreutils
+      # direnv
+      # exa
+      # fd
+      # file
+      # fzf
+      # git-lfs
+      # | graphviz
+      # htop
+      # jq
+      # killall
+      # man-db
+      # man-pages
+      # nix-zsh-completions
       ncurses
-      oh-my-zsh
+      # oh-my-zsh
       pandoc
-      pre-commit
-      tree
-      unzip
+      # pre-commit
+      # tree
+      # unzip
       xclip
-      yq
-      zip
-      zoxide
-      zsh-autosuggestions
+      # yq
+      # zip
+      # zoxide
+      # zsh-autosuggestions
     ] ++ (if ! pkgs.stdenv.hostPlatform.isDarwin then [ pkgs.alacritty ] else [ ]);
   };
 }
