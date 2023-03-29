@@ -51,14 +51,10 @@ in
       ];
 
       bars =
-        let
-          barConfigPath =
-            config.xdg.configFile."i3status-rust/config-top.toml".target;
-        in
         [
           {
             workspaceNumbers = false;
-            statusCommand = "i3status-rs ${barConfigPath}";
+            statusCommand = "${pkgs.i3status-rs}/bin/i3status-rs $(readlink ~/.config/i3status-rust/config-top.toml)";
             position = "top";
             fonts = {
               names = [ "DejaVuSansMono" "FontAwesome5Free" ];
@@ -119,12 +115,12 @@ in
       };
 
       keybindings = lib.mkOptionDefault {
-        "${mod}+Return" = "exec alacritty";
+        "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
         "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
         "${mod}+Tab" = "exec ${pkgs.rofi}/bin/rofi -show window";
-        "${mod}+f" = "exec firefox";
+        "${mod}+f" = "exec ${pkgs.firefox}/bin/firefox";
         "${mod}+Shift+f" = "fullscreen toggle";
-        "${mod}+x" = "exec emacs";
+        "${mod}+x" = "exec ${pkgs.emacs}/bin/emacs";
 
         "${mod}+1" = "workspace number 1:(1)";
         "${mod}+2" = "workspace number 2:(2)";

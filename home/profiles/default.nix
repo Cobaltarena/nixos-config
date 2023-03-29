@@ -2,8 +2,8 @@
   imports = [
     ./desktop
     ./custom
-    # ./editors
-    # ./gaming
+    ./editors
+    ./gaming
     ./languages
     ./terminal
     ./system

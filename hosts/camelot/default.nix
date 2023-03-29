@@ -15,6 +15,7 @@
       #./users # TODO: directory containing all users
     ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot = {
     enable = true;
     configurationLimit = 7;
@@ -26,6 +27,7 @@
       preLVM = true;
     };
   };
+  boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu"];
   boot.supportedFilesystems = [
     "btrfs"
     "ext2"
@@ -45,6 +47,7 @@
   boot.kernelParams = [
     "acpi_backlight=vendor"
     "button.lid_init_state=open"
+    "video=DP-1:1920x1080@144"
   ];
 
   nix = {
@@ -113,6 +116,8 @@
     enableSSHSupport = true;
   };
 
+  programs.zsh.enable = true;
+
   environment.systemPackages = with pkgs; [
     zlib
     bcc
@@ -177,5 +182,12 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
+
+  # vulkan driver
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  hardware.opengl.extraPackages = with pkgs; [
+    amdvlk
+  ];
 }
 

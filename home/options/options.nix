@@ -9,7 +9,7 @@
     };
   };
 
-  options.profiles.editors = (import ./editorsOptions.nix { inherit generateOptions lib; }) // {
+  options.profiles.editors = {
     enable = generateOptions {
       inherit lib;
       default = true;

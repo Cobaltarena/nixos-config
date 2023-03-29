@@ -10,6 +10,7 @@ in
       gimp
       ncurses
       pavucontrol
+      spotify
     ];
   };
 }
