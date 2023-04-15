@@ -27,10 +27,7 @@
 
       custom.doctoenv.enable = true;
 
-      editors = {
-        enable = true;
-        emacs = true;
-      };
+      editors.enable = true;
 
       languages = {
         enable = true;

@@ -18,8 +18,13 @@ rec {
     # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
     onActivation.upgrade = true;
     brews = [
+      "binutils"
+      "glibc"
+      "libpq"
       "llvm"
       "openssl@1.1"
+      "rbenv"
+      "ruby-build"
     ];
     casks = [
       "alfred"
@@ -27,12 +32,13 @@ rec {
       "docker"
       "google-chrome"
       "iterm2"
-      "logseq"
+      # "logseq" # broken ?
       "monitorcontrol"
       "postico"
       "rectangle"
       "slack"
       "visual-studio-code"
+      "wkhtmltopdf"
     ];
   };
 

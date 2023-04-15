@@ -13,7 +13,7 @@ in
       glibc
       glibc.dev
       gnumake
-      stdenv.cc.cc.lib
+      # stdenv.cc.cc.lib
     ];
   };
 }

@@ -48,16 +48,9 @@ in
 
       fira
       font-awesome
-      hicolor-icon-theme
-      roboto-mono
-      unifont
-      material-design-icons
-      emacsPackages.octicons
-      emacs-all-the-icons-fonts
       weather-icons
       unifont
       nerdfonts
-      gyre-fonts
       dejavu_fonts
       meslo-lgs-nf
 
@@ -114,7 +107,7 @@ in
       };
 
       initExtra = ''
-        export PATH=/etc/profiles/per-user/$USER/bin:$PATH
+        export PATH=$HOME/.custom/bin:/etc/profiles/per-user/$USER/bin:$PATH
         eval "$(direnv hook zsh)"
         eval "$(zoxide init --hook pwd zsh)"
         source "$(fzf-share)/key-bindings.zsh"
@@ -131,7 +124,7 @@ in
         "colored-man-pages"
         "fzf"
         "git"
-        "git-prompt"
+        # "git-prompt"
       ];
       theme = "gnzsh-nix";
     };

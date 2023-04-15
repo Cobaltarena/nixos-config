@@ -2,6 +2,16 @@
 
 let
   configOptionEnabled = config.profiles.custom.doctoenv.enable;
+  dctl = pkgs.buildGoModule {
+    name = "dctl";
+    src = fetchGit {
+      url = "git@github.com:doctolib/dctl";
+      ref = "main";
+      rev = "075fd8508d5daa010a5944133c6bc16ca7afbbf1";
+    };
+    vendorSha256 = "AeXdCRHnmM574WlzSA/pMr3GA+zItL2DCNxBoe+YcQg=";
+    doCheck = false;
+  };
 in
 {
   config = lib.mkIf configOptionEnabled {
@@ -32,33 +42,40 @@ in
       harfbuzz.dev
       freetype.dev
       pixman
-      # wkhtmltopdf # dep not building
 
       cmake
       git
       graphviz
       postgresql
+      postgresql.lib
+      pkg-config
       libyaml
-      llvmPackages_14.clang
-      llvmPackages_14.llvm
+      # llvmPackages_14.llvm
+      bison
+      glib.dev
+      glib.out
+      zlib
+      rbenv
+      # stdenv.cc.cc.lib
 
-      # ruby
-      rubyPackages_3_1.rubocop
-      rubyPackages_3_1.solargraph
-      rubyPackages_3_1.syntax_tree-rbs
+      automake
+      autoconf
+      autoconf-archive
+      libiconv
 
       # terraform
       terraform-ls
 
-      # flakky
       gh
       cloudflared
+
+      dctl
     ];
 
     programs.zsh.initExtra = ''
       # Add condition if on darwin, /usr/bin is special and contain packages that cant be installed via nix
       # Docker binary isnt the exact same needed for macos
-      export PATH=/usr/bin:/Applications/Docker.app/Contents/Resources/bin/:$PATH:/opt/homebrew/bin:
+      export PATH=$PATH:/usr/bin:/Applications/Docker.app/Contents/Resources/bin/:/opt/homebrew/bin:
 
       # nvm
       export NVM_DIR="$HOME/.nvm"
@@ -68,7 +85,9 @@ in
       # nix openssl_1_1 does not contain everything as opposed to openssl@1.1 from brew
       # for some reason, I cant change the default system include path used by autotools for ruby dependencies
       # on top of that, the flags to specify the include dir and the lib dir does not seem to work through rbenv
-      export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1) --with-libyaml-dir=$(brew --prefix libyaml)"
+      export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/opt/homebrew/opt/openssl@1.1 --with-libyaml-dir=/opt/homebrew/opt/libyaml --with-pg-include=$(brew --prefix libpq)/include --with-pg-lib=$(brew --prefix libpq)/lib"
+      eval "$(rbenv init - zsh)"
+
       export DOCTOLIB_EMAIL=thomas.crambert@doctolib.com
       export DOCTOLIB_KUBE_REPO=~/Doctolib/kube
       export DOCTOLIB_STAGING_USE_ADMIN_ROLE=0
@@ -77,26 +96,7 @@ in
       export PKG_CONFIG_PATH="${pkgs.glib.dev}/lib/pkgconfig:${pkgs.harfbuzz.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
       export PKG_CONFIG_PATH="${pkgs.freetype.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-      # custom functions for db management
-      function dl_db_test_to_dev() {
-          echo "Migrating the test database (1/5)"
-          RAILS_ENV=test rails db:migrate
-          echo "Migrating the development database (2/5)"
-          RAILS_ENV=development rails db:migrate
-          echo "Dumping the doctolib-development database (3/5)"
-          pg_dump -h 127.0.0.1 --format=tar doctolib-development -f dev_dump
-          echo "Dumping the doctolib-test database (4/5)"
-          pg_dump -h 127.0.0.1 --format=tar doctolib-test -f test_dump
-          echo "Restoring the test database to the development database (5/5)"
-          pg_restore -h 127.0.0.1 --clean -d doctolib-development test_dump
-      }
-
-      function dl_db_restore_dev() {
-          echo "Restoring the dev dump to the development database"
-          pg_restore -h 127.0.0.1 --clean -d doctolib-development dev_dump
-          echo "Removing dumps"
-          rm dev_dump test_dump
-      }
+      export DOCTOLIB_CLI_FS_TELEMETRY_ENABLED=false
     '';
   };
 }

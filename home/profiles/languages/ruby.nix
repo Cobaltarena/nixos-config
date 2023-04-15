@@ -21,8 +21,8 @@ in
           src = pkgs.fetchFromGitHub {
             owner = "rbenv";
             repo = "ruby-build";
-            rev = "4d2e1cc08f3e13c255a427551a2c43aa8caa7b67";
-            sha256 = "/ZJZ6EAZOfk70yGXKJEvYDWSKAIwq8XSomcjd1hS/r0=";
+            rev = "f2c3a7f607b6c24edbf6f6b5953be15a6e2ef10c";
+            sha256 = "bHdxlcLeOttKN/qcf3pI+UnLJdCawaeAvE1NxRWEqjs=";
           };
         }
       ];
