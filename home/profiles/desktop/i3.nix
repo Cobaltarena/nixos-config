@@ -10,6 +10,7 @@ in
     home.packages = with pkgs; [
       betterlockscreen
       feh
+      firefox
       flameshot
       i3status-rust
       i3wsr

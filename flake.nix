@@ -44,13 +44,23 @@
       ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixpkgs-wayland  = {
+      url = "github:nix-community/nixpkgs-wayland";
+    };
+
+    hyprland = {
+      type = "github";
+      owner = "hyprwm";
+      repo = "Hyprland";
+      ref = "2df0d034bc4a18fafb3524401eeeceaa6b23e753";
+    };
   };
 
   outputs =
     { self
     , nixpkgs
     , home-manager
-    , darwin
     , ...
     } @inputs:
     let

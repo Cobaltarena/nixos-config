@@ -6,11 +6,9 @@ in
 {
   fonts.fontconfig.enable = true;
   imports = [
-    # ./packages
-    # ./programs
     ./options
     ./profiles
-    # ./doctoenv.nix
+    args.inputs.hyprland.homeManagerModules.default
   ] ++ (if isDarwin then [ ./darwin.nix ] else [ ]); # TODO: FIXME
   home.homeDirectory = "${homePath}/${username}";
   home.stateVersion = "21.11";

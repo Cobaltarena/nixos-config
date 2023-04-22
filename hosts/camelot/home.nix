@@ -1,6 +1,7 @@
 { lib, ... }:
 
 {
+
   nixpkgs.config = {
     allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
       "discord"
@@ -19,6 +20,7 @@
         browser = true;
         discord = true;
         i3 = true;
+        hyprland = true;
         redshift = true;
         rofi = true;
         slack = true;

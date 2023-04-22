@@ -15,6 +15,7 @@ let
             users.${hostname} = import ../home {
               username = "${hostname}";
               isDarwin = false;
+              inherit inputs;
             };
           } // home-manager-special-args;
         };
@@ -25,12 +26,13 @@ let
         };
       };
       modules = [
+
         inputs.home-manager.nixosModule
         {
           nixpkgs.overlays = helpers.defineSharedOverlays {
             inherit system;
             baseInputChannel = inputs.nixpkgs-unstable-small;
-          };
+          } ++ [ inputs.nixpkgs-wayland.overlay ];
         }
       ] ++ extraModules ++ (inputs.nixpkgs.lib.attrValues nixosModules);
     in
