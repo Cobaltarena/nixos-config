@@ -1,13 +1,18 @@
-{ ... }:
+{ isDarwin, username ? "gawain", ... }@args:
 
+let
+  homePath = if isDarwin then "/Users" else "/home";
+in
 {
   fonts.fontconfig.enable = true;
   imports = [
-    ./packages
-    ./programs
-    ./x
-  ];
-  home.homeDirectory = "/home/gawain";
+    # ./packages
+    # ./programs
+    ./options
+    ./profiles
+    # ./doctoenv.nix
+  ] ++ (if isDarwin then [ ./darwin.nix ] else [ ]); # TODO: FIXME
+  home.homeDirectory = "${homePath}/${username}";
   home.stateVersion = "21.11";
-  home.username = "gawain";
+  home.username = "${username}";
 }

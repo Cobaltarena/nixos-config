@@ -6,15 +6,7 @@
       owner = "NixOS";
       repo = "nixpkgs";
       ref = "nixos-unstable";
-      # rev = "a7ecde854aee5c4c7cd6177f54a99d2c1ff28a31";
     };
-
-    # nixpkgs-unstable-small = {
-    #   type = "github";
-    #   owner = "NixOS";
-    #   repo = "nixpkgs";
-    #   ref = "nixos-unstable-small";
-    # };
 
     home-manager = {
       type = "github";
@@ -22,6 +14,13 @@
       repo = "home-manager";
       ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixpkgs-unstable-small = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixpkgs";
+      ref = "nixos-unstable-small";
     };
 
     flake-utils = {
@@ -37,60 +36,53 @@
       repo = "nixos-hardware";
       ref = "master";
     };
+
+    darwin = {
+      type = "github";
+      owner = "LnL7";
+      repo = "nix-darwin";
+      ref = "master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     { self
     , nixpkgs
     , home-manager
-    , ... } @inputs:
+    , darwin
+    , ...
+    } @inputs:
     let
+      inherit (nixpkgs) lib;
       system = "x86_64-linux";
-    in
-      {
-        # Home config
-        nixosModules = {
-          home = {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.gawain = import ./home;
-            home-manager.verbose = true;
-          };
-          nix-path = {
-            nix.nixPath = [
-              "nixpkgs=${inputs.nixpkgs}"
-            ];
-          };
-        };
+      overlays = import ./overlay;
 
-        overlays = import ./overlay;
-        # TODO
-        # System config
-        nixosConfigurations =
-          let
-            system = "x86_64-linux";
-            shared_overlays = [
-              (self: super: {
-                # packages accessible through pkgs.unstable.package
-                unstable = import inputs.nixpkgs-unstable-small {
-                  inherit system;
-                  nixpkgs.config.allowUnfree = true;
-                };
-              })
-
-            ] ++ builtins.attrValues self.overlays;
-            sharedModules = [
-              home-manager.nixosModule
-              { nixpkgs.overlays = shared_overlays; }
-            ] ++ (nixpkgs.lib.attrValues self.nixosModules);
-          in {
-            camelot = nixpkgs.lib.nixosSystem rec {
-              specialArgs = { inherit inputs; };
-              inherit system;
-              modules = [
-                ./Camelot.nix
-              ] ++ sharedModules;
-            };
-          };
+      home-manager-special-args = rec {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        verbose = true;
       };
+      helpers = import ./helpers.nix;
+    in
+    {
+      darwinConfigurations = import ./configurations/darwin.nix {
+        inherit
+          helpers
+          home-manager-special-args
+          inputs
+          lib
+          self
+          ;
+      };
+      nixosConfigurations = import ./configurations/nixos.nix {
+        inherit
+          helpers
+          home-manager-special-args
+          inputs
+          lib
+          self
+          ;
+      };
+    };
 }

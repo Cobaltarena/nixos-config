@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ lib, ... }:
 
 {
   nixpkgs.config = {
@@ -13,17 +13,49 @@
     ];
   };
   home-manager.users.gawain = {
-    my.packages = {
-      buildSystems.enable = true;
-      c_cpp.enable = true;
-      fonts.enable = true;
-      js.enable = true;
-      misc.enable = true;
-      nix.enable = true;
-      python.enable = true;
-      terminal.enable = true;
-      x.enable = true;
-      yubikey.enable = true;
+    profiles = {
+      desktop = {
+        enable = true;
+        browser = true;
+        discord = true;
+        i3 = true;
+        redshift = true;
+        rofi = true;
+        slack = true;
+        x = true;
+      };
+      gaming = {
+        enable = true;
+        lutris = true;
+        steam = true;
+      };
+
+      editors.enable = true;
+
+      languages = {
+        enable = true;
+        c_cpp = true;
+        js = true;
+        nix = true;
+        python = true;
+        ruby = true;
+      };
+
+      terminal = {
+        enable = true;
+        fileSystem = true;
+        git = true;
+        linuxTools = true;
+        man = true;
+        monitoring = true;
+        terminalEmulator = true;
+        textProcessing = true;
+        zsh = true;
+      };
+      system = {
+        # TODO
+        enable = false;
+      };
     };
   };
 }

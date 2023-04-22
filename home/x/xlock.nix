@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 
 {
   services.screen-locker = lib.mkIf config.my.packages.x.enable {

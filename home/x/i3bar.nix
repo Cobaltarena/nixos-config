@@ -7,9 +7,8 @@
       top = {
         icons = "awesome5";
         settings = {
-    	    theme = "solarized-dark";
-            overrides = {
-            };
+          theme = "solarized-dark";
+          overrides = { };
         };
         blocks = [
           {
@@ -17,7 +16,7 @@
             path = "/";
             info_type = "available";
             format = "{icon} {used}/{total} | {available}";
-	    unit = "GB";
+            unit = "GB";
             interval = 60;
             warning = 20.0;
             alert = 10.0;

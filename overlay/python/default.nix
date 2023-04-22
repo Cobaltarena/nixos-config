@@ -72,7 +72,7 @@ final: prev: {
 
             # version is 0.0.0 for some reasons
             patchPhase = ''
-               sed -i 's/python-lsp-server>=1.4.0/python-lsp-server/g' setup.cfg
+              sed -i 's/python-lsp-server>=1.4.0/python-lsp-server/g' setup.cfg
             '';
 
             src = super.pkgs.python3Packages.fetchPypi {
@@ -97,7 +97,7 @@ final: prev: {
 
             # version is 0.0.0 for some reasons
             patchPhase = ''
-               sed -i 's/python-lsp-server>=1.4.0/python-lsp-server/g' setup.cfg
+              sed -i 's/python-lsp-server>=1.4.0/python-lsp-server/g' setup.cfg
             '';
 
             src = super.pkgs.python3Packages.fetchPypi {

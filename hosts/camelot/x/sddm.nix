@@ -1,4 +1,4 @@
-{ environment, config, pkgs, ...}:
+{ environment, config, pkgs, ... }:
 
 let
   sddmTheme = pkgs.callPackage ./themes/sddm-themes.nix { };

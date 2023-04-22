@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./x/i3.nix
       ./x/sddm.nix
@@ -14,6 +15,7 @@
       #./users # TODO: directory containing all users
     ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot = {
     enable = true;
     configurationLimit = 7;
@@ -25,6 +27,7 @@
       preLVM = true;
     };
   };
+  boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu"];
   boot.supportedFilesystems = [
     "btrfs"
     "ext2"
@@ -44,6 +47,7 @@
   boot.kernelParams = [
     "acpi_backlight=vendor"
     "button.lid_init_state=open"
+    "video=DP-1:1920x1080@144"
   ];
 
   nix = {
@@ -81,7 +85,7 @@
     hostName = "camelot"; # Define your hostname.
     networkmanager.enable = true;
     extraHosts = ''
-       127.0.0.1 gitea droneci
+      127.0.0.1 gitea droneci
     '';
   };
 
@@ -111,6 +115,8 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
     zlib
@@ -153,13 +159,13 @@
   services.printing.browsing = true;
   services.printing.drivers = with pkgs; [ gutenprint canon-cups-ufr2 cups-filters ];
   services.printing.browsedConf = ''
-      BrowseDNSSDSubTypes _cups,_print
-      BrowseLocalProtocols all
-      BrowseRemoteProtocols all
-      CreateIPPPrinterQueues All
+    BrowseDNSSDSubTypes _cups,_print
+    BrowseLocalProtocols all
+    BrowseRemoteProtocols all
+    CreateIPPPrinterQueues All
 
-      BrowseProtocols all
-    '';
+    BrowseProtocols all
+  '';
   services.avahi = {
     enable = true;
     nssmdns = true;
@@ -176,5 +182,12 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
+
+  # vulkan driver
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  hardware.opengl.extraPackages = with pkgs; [
+    amdvlk
+  ];
 }
 
