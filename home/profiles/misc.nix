@@ -5,5 +5,6 @@
     ncurses
     pandoc
     xclip
+    texlive.combined.scheme-full
   ];
 }

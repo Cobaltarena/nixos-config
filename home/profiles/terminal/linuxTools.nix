@@ -6,7 +6,6 @@ in
 {
   config = lib.mkIf configOptionEnabled {
     home.packages = with pkgs; [
-      # binutils
       coreutils
       file
       gnugrep

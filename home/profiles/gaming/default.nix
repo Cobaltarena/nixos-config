@@ -3,13 +3,14 @@
 {
   config = lib.mkIf config.profiles.gaming.enable {
     home.packages = with pkgs; [
-      vulkan-tools
-      vulkan-loader
-      vulkan-headers
       amdvlk
-      vulkan-validation-layers
       lutris
       steam
+      vulkan-headers
+      vulkan-loader
+      vulkan-tools
+      vulkan-validation-layers
+      wineWowPackages.stable
     ];
   };
 }
