@@ -37,6 +37,7 @@
         python = false;
         ruby = true;
       };
+      
 
       terminal = {
         enable = true;

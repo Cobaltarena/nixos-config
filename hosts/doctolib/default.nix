@@ -22,13 +22,14 @@ rec {
       "glibc"
       "libpq"
       "llvm"
-      "openssl@1.1"
+      "openssl@3"
       "rbenv"
       "ruby-build"
     ];
     casks = [
       "alfred"
       "alt-tab"
+      "aws-vault"
       "docker"
       "google-chrome"
       "iterm2"

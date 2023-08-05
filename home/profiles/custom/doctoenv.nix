@@ -30,7 +30,7 @@ in
 
       # env setup
       icu71
-      openssl_1_1
+      openssl_3
       libsodium
       libyaml
       rustc # probably missing many things like rust-lldb
@@ -85,7 +85,7 @@ in
       # nix openssl_1_1 does not contain everything as opposed to openssl@1.1 from brew
       # for some reason, I cant change the default system include path used by autotools for ruby dependencies
       # on top of that, the flags to specify the include dir and the lib dir does not seem to work through rbenv
-      export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/opt/homebrew/opt/openssl@1.1 --with-libyaml-dir=/opt/homebrew/opt/libyaml --with-pg-include=$(brew --prefix libpq)/include --with-pg-lib=$(brew --prefix libpq)/lib"
+      export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/opt/homebrew/opt/openssl@3 --with-libyaml-dir=/opt/homebrew/opt/libyaml --with-pg-include=$(brew --prefix libpq)/include --with-pg-lib=$(brew --prefix libpq)/lib"
       eval "$(rbenv init - zsh)"
 
       export DOCTOLIB_EMAIL=thomas.crambert@doctolib.com
