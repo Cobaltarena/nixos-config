@@ -48,6 +48,7 @@
     "acpi_backlight=vendor"
     "button.lid_init_state=open"
     "video=DP-1:1920x1080@144"
+    "clearcpuid=514"
   ];
 
   nix = {
@@ -161,9 +162,11 @@
   services.fwupd.enable = true;
   documentation.dev.enable = true;
 
-  services.printing.browsing = true;
-  services.printing.drivers = with pkgs; [ gutenprint canon-cups-ufr2 cups-filters ];
-  services.printing.browsedConf = ''
+  services.printing = {
+    enable = true;
+    browsing = true;
+    drivers = with pkgs; [ hplipWithPlugin hplip];
+    browsedConf = ''
     BrowseDNSSDSubTypes _cups,_print
     BrowseLocalProtocols all
     BrowseRemoteProtocols all
@@ -171,9 +174,12 @@
 
     BrowseProtocols all
   '';
+  };
+
   services.avahi = {
     enable = true;
     nssmdns = true;
+    openFirewall = true;
     publish.addresses = true;
     publish.domain = true;
     publish.enable = true;

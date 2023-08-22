@@ -132,6 +132,7 @@ in
           "${mod}+Return" = "exec alacritty";
           "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
           "${mod}+Tab" = "exec ${pkgs.rofi}/bin/rofi -show window";
+          "${mod}+l" = "exec ${pkgs.rofi}/bin/rofi -show LayoutSwitch";
           "${mod}+f" = "exec firefox";
           "${mod}+Shift+f" = "fullscreen toggle";
           "${mod}+x" = "exec emacs";
@@ -201,55 +202,57 @@ in
     programs.i3status-rust = {
       enable = true;
       bars.top = {
-        icons = "awesome5";
-        theme = "solarized-dark";
+        # TODO: fix when updated on unstable
+        settings = {
+          icons = {icons = "awesome5";};
+          theme = {theme = "solarized-dark";};
+        };
         blocks = [
-        {
-          block = "disk_space";
-          path = "/";
-          info_type = "available";
-          format = " $icon $used/$total | $available ";
-          # unit = "GB";
-          interval = 60;
-          warning = 20.0;
-          alert = 10.0;
-        }
-        {
-        block = "memory";
-        format = " $icon $mem_used/$mem_total ";
-        warning_mem = 70.0;
-        critical_mem = 90.0;
-        # don't show swap
-        # clickable = false;
-        }
-        {
-          block = "cpu";
-          interval = 1;
-          format = " $barchart $utilization ";
-        }
-        {
-          block = "net";
-          format = " $icon $ip $device ";
-        }
-        {
-          block = "battery";
-          interval = 10;
-          good = 40;
-          warning = 20;
-          critical = 10;
-          format = " $icon $percentage {$time, $power W} ";
-        }
-        {
-          block = "sound";
-          driver = "pulseaudio";
-          format = " $icon $volume ";
-        }
-        {
-          block = "time";
-          interval = 5;
-          format = " $icon $timestamp.datetime(f:'%a %d/%m %T', l:fr_FR) ";
-          timezone = "Europe/Paris";
-        }
+          {
+            block = "disk_space";
+            path = "/";
+            info_type = "available";
+            format = " $icon $used/$total | $available ";
+            # unit = "GB";
+            interval = 60;
+            warning = 20.0;
+          }
+          {
+            block = "memory";
+            format = " $icon $mem_used/$mem_total ";
+            warning_mem = 70.0;
+            critical_mem = 90.0;
+            # don't show swap
+            # clickable = false;
+          }
+          {
+            block = "cpu";
+            interval = 1;
+            format = " $barchart $utilization ";
+          }
+          {
+            block = "net";
+            format = " $icon $ip $device ";
+          }
+          {
+            block = "battery";
+            interval = 10;
+            good = 40;
+            warning = 20;
+            critical = 10;
+            format = " $icon $percentage {$time, $power W} ";
+          }
+          {
+            block = "sound";
+            driver = "pulseaudio";
+            format = " $icon $volume ";
+          }
+          {
+            block = "time";
+            interval = 5;
+            format = " $icon $timestamp.datetime(f:'%a %d/%m %T', l:fr_FR) ";
+            timezone = "Europe/Paris";
+          }
         ];
       };
     };

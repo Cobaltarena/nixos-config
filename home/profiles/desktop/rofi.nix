@@ -2,6 +2,19 @@
 
 let
   configOptionEnabled = config.profiles.desktop.enable && config.profiles.desktop.rofi;
+  layoutSwitcher = pkgs.writeShellScript "x_layout_switcher" ''
+LAYOUTS="
+us
+fr
+"
+
+if [ -n "$1" ] && [ -n "$(echo $LAYOUTS | grep "$1")" ]; then
+    ${pkgs.xorg.setxkbmap}/bin/setxkbmap "$1"
+    exit
+else
+    echo "$LAYOUTS"
+fi
+  '';
 in
 {
   config = lib.mkIf configOptionEnabled {
@@ -32,6 +45,7 @@ in
         font = "MesloLGS NF Regular 15";
         lines = 20;
         fake-transparency = true;
+        modi = "LayoutSwitch:${layoutSwitcher}";
       };
     };
   };

@@ -6,7 +6,6 @@ let
 in
 {
   xsession.scriptPath = ".hm-xsession";
-
   xsession.windowManager.i3 = lib.mkIf config.my.packages.x.enable {
     enable = true;
     config = {

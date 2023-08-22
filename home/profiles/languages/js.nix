@@ -6,7 +6,7 @@ in
 {
   config = lib.mkIf configOptionEnabled {
     home.packages = with pkgs; [
-      nodejs-16_x
+      nodejs
       nodePackages.pnpm
       nodePackages.typescript
       nodePackages.typescript-language-server

@@ -5,6 +5,7 @@
       unstable = import baseInputChannel {
         inherit system;
         inputs.nixpkgs.config.allowUnfree = true;
+        inputs.nixpkgs.config.allowBroken = true;
       };
     })
   ];

@@ -2,9 +2,12 @@
 
 {
 
+  ## unfree system and user packages here
   nixpkgs.config = {
     allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "cod"
       "discord"
+      "hplip"
       "slack"
       "spotify"
       "steam"
@@ -20,7 +23,7 @@
         browser = true;
         discord = true;
         i3 = true;
-        hyprland = true;
+        hyprland = false;
         redshift = true;
         rofi = true;
         slack = true;

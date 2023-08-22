@@ -29,6 +29,6 @@
     };
 
     resolutions = [{ x = 1920; y = 1080; }];
-
+    exportConfiguration = true;
   };
 }
