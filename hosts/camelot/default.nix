@@ -162,6 +162,10 @@
   services.fwupd.enable = true;
   documentation.dev.enable = true;
 
+  # GUI file explorer options
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+  services.tumbler.enable = true; # Thumbnail support for images
+
   services.printing = {
     enable = true;
     browsing = true;
@@ -200,9 +204,5 @@
   hardware.opengl.extraPackages = with pkgs; [
     amdvlk
   ];
-
-  programs.hyprland = {
-    enable = true;
-  };
 }
 

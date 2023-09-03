@@ -23,7 +23,6 @@
         browser = true;
         discord = true;
         i3 = true;
-        hyprland = false;
         redshift = true;
         rofi = true;
         slack = true;

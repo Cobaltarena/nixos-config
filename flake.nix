@@ -44,14 +44,6 @@
       ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixpkgs-wayland  = {
-      url = "github:nix-community/nixpkgs-wayland?rev=6520ad9164b8a1351b8f221c7364b8ee690f606d";
-    };
-
-    hyprland = {
-      url = "github:hprwm/Hyprland?rev=2df0d034bc4a18fafb3524401eeeceaa6b23e753";
-    };
   };
 
   outputs =

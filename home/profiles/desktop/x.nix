@@ -10,9 +10,11 @@ in
       betterlockscreen
       bibata-cursors
       xautolock
+      xfce.thunar
       xidlehook
       xsel
       xss-lock
+
     ];
 
     home.pointerCursor = {

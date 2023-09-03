@@ -8,7 +8,6 @@ in
   imports = [
     ./options
     ./profiles
-    args.inputs.hyprland.homeManagerModules.default
   ] ++ (if isDarwin then [ ./darwin.nix ] else [ ]); # TODO: FIXME
   home.homeDirectory = "${homePath}/${username}";
   home.stateVersion = "21.11";
