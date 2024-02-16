@@ -9,7 +9,6 @@ in
       direnv
       fzf
       fd
-      exa
       tree
       zoxide
     ];

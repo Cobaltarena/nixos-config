@@ -50,6 +50,13 @@
     "video=DP-1:1920x1080@144"
     "clearcpuid=514"
   ];
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnsupportedSystem = true;
+    permittedInsecurePackages = [
+      "electron-25.9.0"
+    ];
+  };
 
   nix = {
     package = pkgs.nixUnstable;
@@ -90,7 +97,6 @@
     hostName = "camelot"; # Define your hostname.
     networkmanager.enable = true;
     extraHosts = ''
-      127.0.0.1 gitea droneci
     '';
   };
 
@@ -103,6 +109,7 @@
 
   users.users.root.initialHashedPassword = "";
 
+  users.groups.gawain = {};
   users.users.gawain = {
     isNormalUser = true;
     home = "/home/gawain";
@@ -133,6 +140,9 @@
     sddm
     vim
     wget
+
+    # yubikey authenticator
+    pkgs.pcsclite
   ];
 
   services.logind = {
@@ -191,6 +201,8 @@
     publish.workstation = true;
     extraServiceFiles.ssh = "${pkgs.avahi}/etc/avahi/services/ssh.service";
   };
+
+  services.pcscd.enable = true;
 
   programs.steam = {
     enable = true;
