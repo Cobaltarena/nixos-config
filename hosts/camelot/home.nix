@@ -5,7 +5,6 @@
   ## unfree system and user packages here
   nixpkgs.config = {
     allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "cod"
       "discord"
       "hplip"
       "slack"

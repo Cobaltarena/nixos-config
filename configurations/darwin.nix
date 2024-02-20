@@ -35,6 +35,6 @@ in
   doctolib = darwinSystemWrapper {
     system = "aarch64-darwin";
     extraModules = [ ../Doctolib.nix ];
-    hostname = "thomas";
+    hostname = "crambert";
   };
 }

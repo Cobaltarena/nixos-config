@@ -1,7 +1,7 @@
 [
   (final: prev:
 {
-#  python3Packages = import ./python;
+  # python3Packages = import ./python;
   vulkan-utility-libraries = prev.vulkan-utility-libraries.overrideAttrs (old: {
     version = "1.3.268";
     src = final.fetchFromGitHub {

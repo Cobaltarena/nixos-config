@@ -6,8 +6,8 @@ in
 {
   config = lib.mkIf configOptionEnabled {
     home.packages = with pkgs; [
-      nix-prefetch-git
-      nix-prefetch-github
+      # nix-prefetch-git
+      # nix-prefetch-github
       nixpkgs-fmt
       rnix-lsp
     ];

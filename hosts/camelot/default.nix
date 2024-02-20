@@ -113,7 +113,7 @@
   users.users.gawain = {
     isNormalUser = true;
     home = "/home/gawain";
-    group = "gawain";
+    # group = "gawain";
     extraGroups = [
       "docker"
       "input"

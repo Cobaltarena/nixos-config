@@ -19,26 +19,40 @@ rec {
     onActivation.upgrade = true;
     brews = [
       "binutils"
-      "glibc"
+      "cloudflared"
+      "colima"
+      "docker"
+      "docker-credential-helper"
+      "docker-compose"
+      "ggshield"
+      "keychain"
+      "icu4c"
+      "jenv"
       "libpq"
+      "libsodium"
       "llvm"
-      "openssl@1.1"
+      "maven"
+      "neovim"
+      "patchutils"
+      "openjdk@17"
+      "openssh"
+      "openssl@3"
       "rbenv"
       "ruby-build"
     ];
     casks = [
-      "alfred"
+      "alacritty"
       "alt-tab"
-      "docker"
+      "chromedriver"
       "google-chrome"
+      "intellij-idea"
       "iterm2"
-      # "logseq" # broken ?
       "monitorcontrol"
       "postico"
       "rectangle"
       "slack"
-      "visual-studio-code"
       "wkhtmltopdf"
+      "yubico-authenticator"
     ];
   };
 
@@ -52,7 +66,8 @@ rec {
     };
     settings = {
       experimental-features = "nix-command flakes";
-      auto-optimise-store = true;
+      keep-derivations = false;
+      auto-optimise-store = false;
       warn-dirty = false;
       substituters = [
         "https://nix-community.cachix.org/"
@@ -85,10 +100,10 @@ rec {
 
   time.timeZone = "Europe/Paris";
 
-  users.users.thomas = {
+  users.users.crambert = {
     # isNormalUser = true;
-    home = "/Users/thomas";
-    # group = "thomas";
+    home = "/Users/crambert";
+    # group = "crambert";
     # extraGroups = [
     #   "docker"
     #   "networkmanager"

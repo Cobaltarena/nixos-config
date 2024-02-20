@@ -21,7 +21,6 @@ in
 {
   config = lib.mkIf configOptionEnabled {
     home.packages = with pkgs; [
-      cod
       oh-my-zsh
       zsh-autosuggestions
       zsh-nix-shell
@@ -50,8 +49,8 @@ in
       sessionVariables = {
         "ZSH_DISABLE_COMPFIX" = "true";
         "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=10";
-        "VISUAL" = "emacs";
-        "EDITOR" = "emacs";
+        "VISUAL" = "nvim";
+        "EDITOR" = "nvim";
         "_ZO_ECHO" = "1"; # 'When set to 1, z will print the matched directory before navigating to it.
         "_ZO_RESOLVE_SYMLINKS" = "1"; # When set to 1, z will resolve symlinks before adding directories to the database.
       };
@@ -68,15 +67,15 @@ in
         "nix-regenv" = ''echo "use nix" >> .envrc; direnv allow'';
         "nixf-regenv" = ''echo "use flake" >> .envrc; direnv allow'';
         "ls" = "ls --color";
+        "v" = "nvim";
       };
 
       initExtra = ''
-        export PATH=$HOME/.custom/bin:/etc/profiles/per-user/$USER/bin:$PATH:
+        export PATH=$HOME/.custom/bin:~/.local/share/nvim/mason/bin:/etc/profiles/per-user/$USER/bin:$PATH:
         eval "$(direnv hook zsh)"
         eval "$(zoxide init --hook pwd zsh)"
         source "$(fzf-share)/key-bindings.zsh"
         source "$(fzf-share)/completion.zsh"
-        source <(${pkgs.cod}/bin/cod init $$ zsh)
       '';
     };
 

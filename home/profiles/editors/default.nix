@@ -5,13 +5,11 @@
       home.packages = with pkgs; [
         (aspellWithDicts (dicts: with dicts; [ en en-computers en-science fr ]))
         meslo-lgs-nf
+        ripgrep
       ];
-      # TODO: add overlay for emacs 29
+      # programs.neovim.enable = true;
       programs.emacs = {
         enable = true;
-        extraPackages = epkgs: [
-          epkgs.vterm
-        ];
       };
   };
 }

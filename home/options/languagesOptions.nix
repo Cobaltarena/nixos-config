@@ -2,6 +2,7 @@
 
 {
   c_cpp = generateOptions { inherit lib; default = false; description = "Enable c/cpp dev env"; };
+  java = generateOptions { inherit lib; default = false; description = "Enable java dev env"; };
   js = generateOptions { inherit lib; default = false; description = "Enable js/ts dev env"; };
   nix = generateOptions { inherit lib; default = true; description = "Enable nix dev env"; };
   python = generateOptions { inherit lib; default = true; description = "Enable python dev env"; };

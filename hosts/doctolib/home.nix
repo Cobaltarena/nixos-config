@@ -12,12 +12,12 @@
     ];
   };
 
-  users.users.thomas = {
-    name = "thomas";
-    home = "/Users/thomas";
+  users.users.crambert = {
+    name = "crambert";
+    home = "/Users/crambert";
   };
 
-  home-manager.users.thomas = {
+  home-manager.users.crambert = {
     darwin = {
       installApps = false;
     };
@@ -32,6 +32,7 @@
       languages = {
         enable = true;
         c_cpp = false;
+        java = true;
         js = true;
         nix = true;
         python = false;
@@ -45,7 +46,7 @@
         linuxTools = false;
         man = true;
         monitoring = true;
-        terminalEmulator = false;
+        terminalEmulator = true;
         textProcessing = true;
         zsh = true;
       };
